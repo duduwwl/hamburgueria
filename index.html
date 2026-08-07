@@ -1,1 +1,1153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8c20f">
+  <meta name="description" content="Hambúrgueres artesanais na brasa em Lavras, MG — Hamburgueria Na Brasa.">
+  <title>Hamburgueria Na Brasa | Lavras, MG</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap');
+    :root {
+      --ink: #151515;
+      --muted: #6e6e6e;
+      --line: #dfdfdf;
+      --paper: #ffffff;
+      --cream: #fffdf7;
+      --yellow: #f8c20f;
+      --yellow-deep: #e5a900;
+      --soft-yellow: #fff6cc;
+      --green: #297550;
+      --red: #c24e3f;
+      --shadow: 0 18px 50px rgba(20, 20, 20, .11);
+      --radius: 22px;
+    }
 
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; margin: 0 0 14px;
+      color: #5c4800; font-size: .77rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 25px; height: 3px; background: var(--yellow); border-radius: 9px; }
+    .section-heading { max-width: 660px; margin-bottom: 31px; }
+    .section-heading h2 { margin: 0 0 11px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: .98; letter-spacing: -.06em; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 1.03rem; }
+
+    .site-header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94); backdrop-filter: blur(13px); border-bottom: 1px solid rgba(20,20,20,.08); }
+    .nav { min-height: 73px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 950; font-size: 1.08rem; letter-spacing: -.045em; }
+    .brand-mark { display: grid; place-items: center; width: 39px; height: 39px; border: 2px solid var(--ink); border-radius: 50%; background: var(--yellow); box-shadow: 3px 3px 0 var(--ink); }
+    .brand-mark svg { width: 29px; height: 29px; }
+    .nav-links { display: flex; align-items: center; gap: 23px; color: #4b4b4b; font-size: .9rem; font-weight: 700; }
+    .nav-links a:hover { color: #000; }
+    .cart-toggle, .menu-toggle {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 10px 15px;
+      border: 2px solid var(--ink); border-radius: 999px; background: var(--ink); color: #fff; font-weight: 850; transition: transform .2s, background .2s;
+    }
+    .cart-toggle:hover, .menu-toggle:hover { transform: translateY(-2px); background: #2c2c2c; }
+    .cart-count { display: grid; place-items: center; min-width: 21px; height: 21px; padding: 0 5px; border-radius: 50%; background: var(--yellow); color: var(--ink); font-size: .72rem; }
+    .cart-icon { display: grid; width: 18px; height: 18px; place-items: center; }
+    .cart-icon svg { width: 18px; height: 18px; overflow: visible; }
+    .menu-toggle { display: none; padding: 9px 11px; }
+
+    .hero { position: relative; overflow: hidden; background: var(--ink); color: #fff; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.63) 49%, rgba(0,0,0,.18) 100%); pointer-events: none; }
+    .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% center; opacity: .92; }
+    .hero-content { position: relative; z-index: 1; min-height: 578px; display: grid; align-content: center; padding: 88px 0; }
+    .hero .eyebrow { color: #ffdf59; }
+    .hero h1 { max-width: 710px; margin: 0; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: clamp(2.8rem, 5.6vw, 5.1rem); font-weight: 400; line-height: .92; letter-spacing: .012em; text-transform: uppercase; }
+    .hero h1 em { color: var(--yellow); font-style: normal; }
+    .hero-copy { max-width: 490px; margin: 24px 0 29px; color: #f3f3f3; font-size: clamp(1rem, 2vw, 1.18rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 14px 19px; border: 2px solid var(--ink); border-radius: 12px; background: var(--yellow); color: var(--ink); font-size: .94rem; font-weight: 900; transition: transform .2s, box-shadow .2s, background .2s; }
+    .button:hover { transform: translateY(-3px); box-shadow: 4px 4px 0 var(--ink); }
+    .button.dark { background: transparent; border-color: #fff; color: #fff; }
+    .button.dark:hover { box-shadow: 4px 4px 0 var(--yellow); }
+    .button.full { width: 100%; }
+    .hero-quick-info { display: flex; flex-wrap: wrap; gap: 23px; margin-top: 51px; }
+    .quick-info { display: flex; align-items: center; gap: 9px; color: #f6f6f6; font-size: .83rem; font-weight: 700; }
+    .quick-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); }
+
+    .service-strip { background: var(--yellow); border-bottom: 2px solid var(--ink); }
+    .service-strip .container { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 67px; }
+    .strip-item { display: flex; align-items: center; gap: 9px; font-weight: 850; font-size: .86rem; white-space: nowrap; }
+    .strip-item span { font-size: 1.13rem; }
+
+    section { padding: 96px 0; }
+    .promos-section { margin: 0 0 32px; padding: 24px; border: 1px solid #4b473d; border-radius: var(--radius); background: linear-gradient(135deg, #1e1b10, #161512); }
+    .promos-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
+    .promos-heading .eyebrow { margin-bottom: 8px; }
+    .promos-heading h3 { margin: 0; color: var(--white); font-size: 1.65rem; letter-spacing: -.055em; }
+    .promos-heading > p { max-width: 430px; margin: 0; color: var(--muted); font-size: .84rem; text-align: right; }
+    .promos-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
+    .promo-card { overflow: hidden; display: flex; flex-direction: column; border: 1px solid #514d41; border-radius: 15px; background: #171612; transition: transform .22s, border-color .22s, box-shadow .22s; }
+    .promo-card:hover { transform: translateY(-4px); border-color: var(--yellow); box-shadow: 0 15px 28px rgba(0,0,0,.35); }
+    .promo-image { position: relative; aspect-ratio: 1.7; overflow: hidden; background: #090909; }
+    .promo-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent, rgba(0,0,0,.52)); }
+    .promo-image img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8) contrast(1.1) brightness(.75); }
+    .promo-tag { position: absolute; z-index: 1; top: 10px; left: 10px; padding: 5px 8px; border-radius: 999px; background: var(--yellow); color: #161510; font-size: .61rem; font-weight: 950; letter-spacing: .06em; text-transform: uppercase; }
+    .promo-body { display: flex; flex: 1; flex-direction: column; padding: 13px; }
+    .promo-body h4 { margin: 0 0 5px; color: var(--white); font-size: .99rem; line-height: 1.05; letter-spacing: -.035em; }
+    .promo-body p { flex: 1; margin: 0 0 12px; color: var(--muted); font-size: .73rem; line-height: 1.4; }
+    .promo-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .promo-price { color: var(--yellow); font-size: .97rem; font-weight: 950; }
+    .promo-add { padding: 7px 9px; border: 1px solid var(--yellow); border-radius: 8px; background: transparent; color: var(--white); font-size: .72rem; font-weight: 900; }
+    .promo-add:hover { background: var(--yellow); color: #161510; }
+    .category-switch { display: flex; flex-wrap: wrap; gap: 9px; margin: 0 0 28px; }
+    .category-btn { padding: 10px 15px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: #454545; font-size: .87rem; font-weight: 800; }
+    .category-btn:hover, .category-btn.active { border-color: var(--ink); background: var(--ink); color: #fff; }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .product-card { overflow: hidden; display: flex; flex-direction: column; min-height: 100%; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: 0 8px 22px rgba(0,0,0,.035); transition: transform .25s, box-shadow .25s; }
+    .product-card:hover { transform: translateY(-7px); box-shadow: var(--shadow); }
+    .product-image-wrap { position: relative; overflow: hidden; aspect-ratio: 1.28; background: #e7e4dc; }
+    .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
+    .product-card:hover .product-image { transform: scale(1.06); }
+    .card-badge { position: absolute; top: 13px; left: 13px; padding: 6px 9px; border-radius: 999px; background: var(--yellow); color: var(--ink); font-size: .7rem; font-weight: 900; text-transform: uppercase; letter-spacing: .055em; }
+    .product-body { display: flex; flex: 1; flex-direction: column; padding: 18px; }
+    .product-title { margin: 0 0 7px; font-size: 1.2rem; line-height: 1.05; letter-spacing: -.04em; }
+    .product-brand { margin: -1px 0 7px; color: #a57900; font-size: .69rem; font-weight: 900; letter-spacing: .075em; text-transform: uppercase; }
+    .product-description { flex: 1; min-height: 60px; margin: 0 0 16px; color: var(--muted); font-size: .84rem; line-height: 1.45; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 9px; }
+    .price { font-size: 1.07rem; font-weight: 950; letter-spacing: -.035em; }
+    .add-button { width: 40px; height: 40px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 12px; background: var(--yellow); color: var(--ink); font-size: 1.25rem; font-weight: 900; transition: transform .2s, background .2s; }
+    .add-button:hover { transform: rotate(7deg) scale(1.06); background: #ffda48; }
+    .menu-note { margin: 27px 0 0; color: var(--muted); font-size: .82rem; text-align: center; }
+
+    .feature-section { overflow: hidden; position: relative; padding: 0; background: #f6f4ed; }
+    .features { display: grid; grid-template-columns: 1fr 1fr; min-height: 480px; }
+    .feature-image { min-height: 420px; background: url('https://images.unsplash.com/photo-1655895293506-6563d58372ec?auto=format&fit=crop&w=1300&q=88') center/cover; }
+    .feature-copy { display: grid; align-content: center; padding: 70px clamp(27px, 7vw, 100px); }
+    .feature-copy h2 { max-width: 430px; margin: 0 0 15px; font-size: clamp(2.2rem, 4.6vw, 4.1rem); line-height: .9; letter-spacing: -.07em; }
+    .feature-copy p { max-width: 470px; margin: 0 0 25px; color: #555; }
+    .feature-points { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; font-size: .91rem; font-weight: 750; }
+    .feature-points li { display: flex; align-items: center; gap: 10px; }
+    .check { display: grid; place-items: center; flex: 0 0 24px; width: 24px; height: 24px; border-radius: 50%; background: var(--yellow); font-size: .82rem; }
+
+    .delivery-section { background: var(--cream); }
+    .brand-story { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(260px, .9fr); align-items: stretch; gap: 28px; }
+    .brand-story-copy { padding: clamp(29px, 5vw, 58px); border: 1px solid #514d41; border-radius: var(--radius); background: linear-gradient(135deg, #211c0b, #141411); }
+    .brand-story-copy h2 { max-width: 650px; margin: 0 0 15px; color: var(--white); font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: clamp(2.35rem, 4.7vw, 4.2rem); font-weight: 400; line-height: .92; letter-spacing: .018em; text-transform: uppercase; }
+    .brand-story-copy p { max-width: 620px; margin: 0; color: #d6d1c1; font-size: 1rem; }
+    .brand-story-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .brand-story-badge { padding: 9px 11px; border: 1px solid rgba(248,194,15,.54); border-radius: 999px; color: #ffe58a; font-size: .78rem; font-weight: 850; }
+    .brand-story-aside { display: grid; gap: 13px; }
+    .brand-story-card { display: grid; grid-template-columns: 44px 1fr; align-items: center; gap: 14px; padding: 21px; border: 1px solid #444039; border-radius: 16px; background: var(--surface); }
+    .brand-story-card span { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 12px; background: var(--yellow); color: #161510; font-size: 1.2rem; }
+    .brand-story-card strong { display: block; color: var(--white); font-size: .9rem; }
+    .brand-story-card p { margin: 3px 0 0; color: var(--muted); font-size: .79rem; }
+    .delivery-layout { display: none; grid-template-columns: 1.05fr .95fr; align-items: stretch; gap: 34px; }
+    .delivery-card { padding: clamp(25px, 4vw, 45px); border: 2px solid var(--ink); border-radius: var(--radius); background: #fff; box-shadow: 9px 9px 0 var(--yellow); }
+    .delivery-card h2 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 3.3rem); line-height: .92; letter-spacing: -.065em; }
+    .delivery-card > p { margin: 0 0 26px; color: var(--muted); }
+    .cep-row { display: flex; gap: 10px; }
+    .field-input { width: 100%; min-height: 48px; padding: 12px 13px; border: 1.5px solid #bebebe; border-radius: 10px; outline: 0; color: var(--ink); background: #fff; }
+    .field-input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(248,194,15,.32); }
+    .delivery-response { display: flex; align-items: flex-start; gap: 10px; min-height: 51px; margin-top: 17px; padding: 13px; border-radius: 10px; background: var(--soft-yellow); color: #493b0a; font-size: .87rem; font-weight: 700; }
+    .delivery-response.error { background: #fff1ee; color: #8a3b31; }
+    .delivery-response.success { background: #ecf7ef; color: #21623e; }
+    .delivery-side { display: grid; gap: 13px; }
+    .delivery-stat { display: flex; align-items: center; gap: 15px; padding: 20px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+    .delivery-stat-icon { display: grid; place-items: center; flex: 0 0 42px; width: 42px; height: 42px; border-radius: 11px; background: var(--yellow); font-size: 1.26rem; }
+    .delivery-stat strong { display: block; font-size: .9rem; }
+    .delivery-stat p { margin: 2px 0 0; color: var(--muted); font-size: .82rem; }
+    .tiny-note { margin: 16px 0 0; color: var(--muted); font-size: .76rem; }
+
+    .checkout-section { display: none; scroll-margin-top: 84px; background: #fff; }
+    .checkout-layout { display: grid; grid-template-columns: minmax(0, 1fr) 370px; align-items: start; gap: 28px; }
+    .checkout-card { padding: clamp(23px, 4vw, 39px); border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow); }
+    .checkout-card h2 { margin: 0 0 7px; font-size: clamp(1.9rem, 3.4vw, 2.75rem); line-height: .95; letter-spacing: -.055em; }
+    .checkout-card > p { margin: 0 0 27px; color: var(--muted); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-grid .span-two { grid-column: span 2; }
+    .field-label { display: grid; gap: 7px; color: #3d3d3d; font-size: .79rem; font-weight: 820; }
+    textarea.field-input { min-height: 79px; resize: vertical; }
+    .payment-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .payment-option { position: relative; display: flex; align-items: center; gap: 10px; min-height: 55px; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 11px; color: #363636; font-size: .84rem; font-weight: 800; cursor: pointer; }
+    .payment-option:has(input:checked) { border-color: var(--ink); background: #fff8d8; }
+    .payment-option input { accent-color: var(--ink); }
+    .checkout-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 23px; }
+    .outline-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 15px; border: 1.5px solid var(--ink); border-radius: 11px; background: #fff; color: var(--ink); font-size: .84rem; font-weight: 900; }
+    .outline-button:hover { background: #f4f4f4; }
+    .order-summary { position: sticky; top: 92px; overflow: hidden; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--ink); color: #fff; }
+    .summary-head { padding: 22px 23px 16px; border-bottom: 1px solid #3c3c3c; }
+    .summary-head h3 { margin: 0; font-size: 1.2rem; letter-spacing: -.04em; }
+    .summary-items { max-height: 270px; overflow: auto; padding: 10px 23px; }
+    .summary-item { display: flex; justify-content: space-between; gap: 10px; padding: 11px 0; border-bottom: 1px solid #343434; font-size: .84rem; }
+    .summary-item:last-child { border-bottom: 0; }
+    .summary-item-name { color: #eaeaea; }
+    .summary-item-quantity { color: var(--yellow); font-weight: 850; }
+    .summary-footer { padding: 16px 23px 22px; background: #222; }
+    .summary-line { display: flex; justify-content: space-between; margin: 6px 0; color: #d7d7d7; font-size: .84rem; }
+    .summary-line.total { margin-top: 14px; padding-top: 14px; border-top: 1px solid #4c4c4c; color: #fff; font-size: 1.07rem; font-weight: 950; }
+    .empty-summary { padding: 22px 0; color: #bababa; font-size: .88rem; text-align: center; }
+    .order-confirmation { display: none; margin-top: 19px; padding: 16px; border: 1.5px solid #4e9b6d; border-radius: 12px; background: #effaf3; color: #1e5d3a; }
+    .order-confirmation.visible { display: block; }
+    .order-confirmation strong { display: block; margin-bottom: 4px; }
+
+    .tracking-section { padding: 74px 0; background: var(--yellow); }
+    .tracking-layout { display: grid; grid-template-columns: 1fr .9fr; align-items: center; gap: 50px; }
+    .tracking-section h2 { max-width: 520px; margin: 0 0 11px; font-size: clamp(2.2rem, 4.2vw, 4rem); line-height: .91; letter-spacing: -.07em; }
+    .tracking-section p { max-width: 510px; margin: 0; color: #453700; }
+    .tracking-box { padding: 21px; border: 2px solid var(--ink); border-radius: 17px; background: #fff; box-shadow: 7px 7px 0 var(--ink); }
+    .track-input-wrap { display: flex; gap: 9px; }
+    .track-result { display: none; margin-top: 16px; padding: 13px; border-radius: 10px; background: #f5f5f5; font-size: .84rem; }
+    .track-result.visible { display: block; }
+    .track-result strong { display: block; margin-bottom: 5px; }
+
+    .manager-section { background: #171717; color: #fff; }
+    .manager-section .eyebrow { color: #ffdd55; }
+    .manager-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 30px; }
+    .manager-heading h2 { margin: 0; font-size: clamp(2.1rem, 4vw, 3.4rem); line-height: .93; letter-spacing: -.065em; }
+    .manager-heading p { max-width: 480px; margin: 0; color: #c6c6c6; font-size: .94rem; }
+    .manager-login, .manager-dashboard { border: 1px solid #3b3b3b; border-radius: var(--radius); background: #212121; }
+    .manager-login { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 17px; padding: 27px; }
+    .manager-login p { margin: 5px 0 0; color: #c0c0c0; font-size: .85rem; }
+    .manager-login .field-label { color: #ededed; }
+    .manager-login .field-input { width: min(250px, 100%); border-color: #686868; background: #fff; }
+    .manager-dashboard { display: none; overflow: hidden; }
+    .manager-dashboard.visible { display: block; }
+    .manager-dashboard-top { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 19px 22px; border-bottom: 1px solid #3a3a3a; }
+    .manager-dashboard-top p { margin: 0; color: #c2c2c2; font-size: .83rem; }
+    .manager-orders { display: grid; gap: 1px; background: #393939; }
+    .manager-order { display: grid; grid-template-columns: 100px minmax(120px,1.5fr) minmax(150px, 2.2fr) 145px 38px; align-items: center; gap: 16px; padding: 17px 22px; background: #212121; }
+    .order-id { color: var(--yellow); font-size: .82rem; font-weight: 950; }
+    .order-client strong, .order-products { display: block; font-size: .84rem; }
+    .order-client small, .order-time { display: block; margin-top: 3px; color: #acacac; font-size: .76rem; }
+    .order-products { color: #d2d2d2; font-size: .78rem; }
+    .status-select { width: 100%; padding: 9px 8px; border: 1px solid #565656; border-radius: 8px; outline: 0; background: #2e2e2e; color: #fff; font-size: .77rem; font-weight: 800; }
+    .manager-logout { border: 0; background: transparent; color: #d0d0d0; font-size: .78rem; font-weight: 800; }
+    .manager-logout:hover { color: var(--yellow); }
+    .manager-security-label { margin: 17px 0 0; color: #a8a8a8; font-size: .76rem; }
+
+    .footer { padding: 57px 0 22px; background: #fff; }
+    .footer-main { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 35px; padding-bottom: 41px; }
+    .footer-brand-copy { max-width: 330px; margin: 13px 0 0; color: var(--muted); font-size: .87rem; }
+    .footer h3 { margin: 0 0 13px; font-size: .91rem; }
+    .footer-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; color: #535353; font-size: .84rem; }
+    .footer-list a:hover { color: #000; text-decoration: underline; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 15px; padding-top: 20px; border-top: 1px solid var(--line); color: #777; font-size: .75rem; }
+
+    .drawer-backdrop { visibility: hidden; position: fixed; inset: 0; z-index: 29; background: rgba(0,0,0,.46); opacity: 0; transition: opacity .25s, visibility .25s; }
+    .drawer-backdrop.visible { visibility: visible; opacity: 1; }
+    .cart-drawer { position: fixed; z-index: 30; top: 0; right: 0; display: flex; flex-direction: column; width: min(424px, 100%); height: 100dvh; padding: 23px; background: #fff; box-shadow: -15px 0 45px rgba(0,0,0,.14); transform: translateX(102%); transition: transform .28s ease; }
+    .cart-drawer.open { transform: translateX(0); }
+    .drawer-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .drawer-head h2 { margin: 0; font-size: 1.55rem; letter-spacing: -.05em; }
+    .icon-close { display: grid; place-items: center; width: 35px; height: 35px; border: 0; border-radius: 50%; background: #f0f0f0; font-size: 1.3rem; }
+    .cart-list { flex: 1; min-height: 0; overflow: auto; margin: 9px -5px; padding: 0 5px; }
+    .cart-empty { display: grid; place-items: center; min-height: 220px; color: var(--muted); text-align: center; font-size: .9rem; }
+    .cart-item { display: grid; grid-template-columns: 67px 1fr auto; gap: 11px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .cart-item img { width: 67px; height: 60px; border-radius: 9px; object-fit: cover; }
+    .cart-item h3 { margin: 0 0 3px; font-size: .88rem; line-height: 1.1; }
+    .cart-item p { margin: 0; color: var(--muted); font-size: .78rem; }
+    .quantity-controls { display: flex; align-items: center; gap: 7px; margin-top: 8px; }
+    .quantity-controls button { display: grid; place-items: center; width: 22px; height: 22px; border: 1px solid #b6b6b6; border-radius: 6px; background: #fff; font-weight: 900; }
+    .quantity-controls span { min-width: 16px; font-size: .79rem; font-weight: 850; text-align: center; }
+    .cart-price { align-self: start; font-size: .84rem; font-weight: 900; white-space: nowrap; }
+    .drawer-footer { max-height: min(65dvh, 590px); overflow: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+    .drawer-total { display: flex; justify-content: space-between; margin: 0 0 14px; font-size: 1.06rem; font-weight: 950; }
+    .drawer-help { margin: 10px 0 0; color: var(--muted); font-size: .72rem; text-align: center; }
+    .drawer-continue { width: auto; margin-top: 9px; padding: 8px 11px; font-size: .75rem; }
+    .drawer-checkout-form { display: grid; gap: 12px; margin-top: 15px; padding-top: 16px; border-top: 1px solid var(--line); }
+    .drawer-checkout-form[hidden] { display: none; }
+    .drawer-checkout-form h3 { margin: 0; color: var(--white); font-size: 1rem; letter-spacing: -.035em; }
+    .drawer-checkout-form > p { margin: -6px 0 0; color: var(--muted); font-size: .74rem; }
+    .drawer-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .drawer-form-grid .span-two { grid-column: span 2; }
+    .drawer-checkout-form .field-label { gap: 5px; font-size: .71rem; }
+    .drawer-checkout-form .field-input { min-height: 42px; padding: 9px 10px; font-size: .8rem; }
+    .drawer-cep-row { display: grid; grid-template-columns: 1fr auto; gap: 7px; }
+    .drawer-cep-row .field-input { min-width: 0; }
+    .drawer-cep-button { min-height: 42px; padding: 0 11px; border: 1px solid var(--yellow); border-radius: 9px; background: var(--yellow); color: var(--ink); font-size: .73rem; font-weight: 900; }
+    .drawer-delivery-response { margin: -3px 0 0; color: #d9d4c8; font-size: .72rem; line-height: 1.35; }
+    .drawer-delivery-response.success { color: #c5f0d3; }
+    .drawer-delivery-response.error { color: #ffc6bd; }
+    .drawer-payment-options { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .drawer-payment-option { display: flex; align-items: center; gap: 7px; min-height: 42px; padding: 9px; border: 1px solid var(--line); border-radius: 9px; color: var(--white); font-size: .75rem; font-weight: 800; cursor: pointer; }
+    .drawer-payment-option:has(input:checked) { border-color: var(--yellow); background: rgba(248,194,15,.12); }
+    .drawer-payment-option input { accent-color: var(--yellow); }
+    .drawer-order-confirmation { display: none; margin-top: 13px; padding: 12px; border: 1px solid #4e9b6d; border-radius: 10px; background: #143827; color: #c5f0d3; font-size: .77rem; }
+    .drawer-order-confirmation.visible { display: block; }
+    .drawer-order-confirmation strong { display: block; margin-bottom: 3px; }
+    .toast { visibility: hidden; position: fixed; z-index: 50; bottom: 23px; left: 50%; max-width: calc(100% - 34px); padding: 12px 16px; border-radius: 10px; background: var(--ink); color: #fff; font-size: .85rem; font-weight: 750; box-shadow: 0 10px 25px rgba(0,0,0,.2); opacity: 0; transform: translate(-50%, 14px); transition: opacity .2s, transform .2s, visibility .2s; }
+    .toast.show { visibility: visible; opacity: 1; transform: translate(-50%, 0); }
+
+    /* Tema noturno — mantém o amarelo como ponto de destaque e dá o mesmo tratamento às fotos. */
+    :root {
+      --paper: #10100f;
+      --cream: #151411;
+      --muted: #bbb8ad;
+      --line: #3f3d36;
+      --shadow: 0 18px 50px rgba(0, 0, 0, .42);
+      --night: #10100f;
+      --surface: #1b1a17;
+      --surface-raised: #24221d;
+      --white: #f9f7f0;
+    }
+    body { background: var(--paper); color: var(--white); }
+    .site-header { background: rgba(16, 16, 15, .94); border-bottom-color: rgba(248, 194, 15, .26); }
+    .brand { color: var(--white); }
+    .brand-mark { border-color: var(--yellow); box-shadow: 3px 3px 0 var(--white); }
+    .nav-links { color: #c6c3ba; }
+    .nav-links a:hover { color: var(--yellow); }
+    .cart-toggle { border-color: var(--yellow); background: var(--yellow); color: #161510; }
+    .cart-toggle:hover { background: #ffda47; }
+    .cart-count { background: #171612; color: var(--yellow); }
+    .eyebrow { color: #f9d852; }
+    .service-strip { background: #201900; border-bottom-color: var(--yellow); }
+    .strip-item { color: #faf0c9; }
+    .hero-photo { filter: saturate(.78) contrast(1.15) brightness(.67); }
+    .category-btn { border-color: #4a4841; background: #1b1a17; color: #e7e3d8; }
+    .category-btn:hover, .category-btn.active { border-color: var(--yellow); background: var(--yellow); color: #171510; }
+    .product-card { border-color: #46433b; background: var(--surface); box-shadow: 0 12px 30px rgba(0, 0, 0, .3); }
+    .product-card:hover { box-shadow: 0 22px 44px rgba(0, 0, 0, .6); }
+    .product-image-wrap { aspect-ratio: 4 / 3; background: #090909; }
+    .product-image-wrap::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.05) 20%, rgba(0,0,0,.42) 100%); }
+    .product-image { filter: saturate(.78) contrast(1.16) brightness(.76); }
+    .product-image-wrap:has(.packshot) { background: #f2f2ef; }
+    .product-image-wrap:has(.packshot)::after { background: linear-gradient(180deg, rgba(0,0,0,.01), rgba(0,0,0,.05)); }
+    .product-image.packshot { object-fit: contain; padding: 0; background: #f2f2ef; filter: contrast(1.04) saturate(1.04) brightness(.97); }
+    .product-card:hover .product-image { transform: scale(1.06); filter: saturate(.9) contrast(1.18) brightness(.84); }
+    .product-card:hover .product-image.packshot { transform: scale(1.035); filter: contrast(1.06) saturate(1.08) brightness(1); }
+    .card-badge { box-shadow: 0 3px 10px rgba(0,0,0,.28); }
+    .product-title, .price { color: var(--white); }
+    .product-brand { color: #ffd852; }
+    .add-button { border-color: var(--yellow); box-shadow: 0 0 0 1px rgba(0,0,0,.4); }
+    .add-button:hover { background: #ffda48; }
+    .feature-section { background: #151411; border-top: 1px solid #3f3d36; border-bottom: 1px solid #3f3d36; }
+    .feature-image { background-image: linear-gradient(90deg, rgba(0,0,0,.36), rgba(0,0,0,.68)), url('https://images.unsplash.com/photo-1655895293506-6563d58372ec?auto=format&fit=crop&w=1300&q=88'); }
+    .feature-copy p { color: #c8c4b8; }
+    .delivery-section { background: #171612; }
+    .delivery-card { border-color: #686257; background: var(--surface); box-shadow: 9px 9px 0 #8a6900; }
+    .delivery-card > p { color: var(--muted); }
+    .field-label { color: #e5e1d7; }
+    .field-input { border-color: #5d5a50; background: #282620; color: var(--white); }
+    .field-input::placeholder { color: #9a978e; }
+    .field-input:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px rgba(248,194,15,.22); }
+    .delivery-response { background: #2c260d; color: #f5db6a; }
+    .delivery-response.success { background: #163d2a; color: #c5f0d3; }
+    .delivery-response.error { background: #42201c; color: #ffc6bd; }
+    .delivery-stat { border-color: #403d36; background: var(--surface); }
+    .delivery-stat p { color: #bbb8ad; }
+    .checkout-section { background: #10100f; }
+    .checkout-card { border-color: #454139; background: var(--surface); }
+    .checkout-card > p { color: var(--muted); }
+    .payment-option { border-color: #4b4941; background: #24231e; color: #ebe7dc; }
+    .payment-option:has(input:checked) { border-color: var(--yellow); background: #3a3006; }
+    .outline-button { border-color: #807a6d; background: transparent; color: var(--white); }
+    .outline-button:hover { border-color: var(--yellow); background: #29261d; }
+    .order-summary { border-color: var(--yellow); background: #0a0a09; }
+    .summary-footer { background: #171612; }
+    .summary-item { border-bottom-color: #393832; }
+    .order-confirmation { background: #143827; color: #c5f0d3; }
+    .tracking-section { background: #1d1802; border-top: 1px solid var(--yellow); border-bottom: 1px solid var(--yellow); }
+    .tracking-section p { color: #ded09a; }
+    .tracking-box { border-color: var(--yellow); background: #151411; box-shadow: 7px 7px 0 #080807; }
+    .track-result { background: #29261f; color: #e9e5da; }
+    .manager-section { background: #0d0d0c; }
+    .manager-login, .manager-dashboard { border-color: #3f3d37; background: #171716; }
+    .manager-orders { background: #3a3833; }
+    .manager-order { background: #1d1c1a; }
+    .status-select { border-color: #5a574e; background: #292721; }
+    .footer { background: #10100f; }
+    .footer-list { color: #c3bfb4; }
+    .footer-list a:hover { color: var(--yellow); }
+    .footer-bottom { border-top-color: #3d3a34; color: #aaa69c; }
+    .cart-drawer { background: #171612; color: var(--white); }
+    .drawer-head { border-bottom-color: #454139; }
+    .icon-close { background: #312f29; color: #fff; }
+    .cart-item { border-bottom-color: #3b3933; }
+    .cart-item p, .drawer-help, .cart-empty { color: #bbb7ab; }
+    .quantity-controls button { border-color: #716c60; background: #25231e; color: var(--white); }
+    .drawer-footer { border-top-color: #454139; }
+    .toast { background: var(--yellow); color: #171510; }
+
+    @media (max-width: 920px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .promos-grid { grid-template-columns: repeat(2, 1fr); }
+      .features, .delivery-layout, .checkout-layout, .tracking-layout { grid-template-columns: 1fr; }
+      .brand-story { grid-template-columns: 1fr; }
+      .feature-image { min-height: 330px; }
+      .feature-copy { padding: 56px 30px; }
+      .delivery-side { grid-template-columns: repeat(3, 1fr); }
+      .order-summary { position: static; }
+      .manager-order { grid-template-columns: 90px minmax(115px,1fr) minmax(125px,1.5fr) 135px; }
+      .manager-order .order-time { display: none; }
+      .manager-order .manager-logout { display: none; }
+      .footer-main { grid-template-columns: 1.25fr 1fr; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(100% - 28px, 1160px); }
+      .nav { min-height: 65px; gap: 10px; }
+      .brand { font-size: .95rem; }
+      .brand-mark { width: 34px; height: 34px; font-size: 1.1rem; }
+      .cart-toggle { padding: 9px 11px; }
+      .cart-toggle > span:first-child { display: none; }
+      .menu-toggle { display: none; }
+      .hero-content { min-height: 565px; padding: 67px 0; }
+      .hero::after { background: linear-gradient(90deg, rgba(0,0,0,.87), rgba(0,0,0,.54)); }
+      .service-strip .container { justify-content: flex-start; min-height: 54px; overflow-x: auto; }
+      .strip-item { font-size: .76rem; }
+      .strip-item:nth-child(n+3) { display: none; }
+      section { padding: 69px 0; }
+      .menu-grid { grid-template-columns: 1fr; gap: 15px; }
+      .promos-section { padding: 18px; }
+      .promos-heading { display: block; }
+      .promos-heading > p { margin-top: 9px; text-align: left; }
+      .promos-grid { grid-template-columns: 1fr; }
+      .product-card { display: flex; flex-direction: column; min-height: 0; }
+      .product-image-wrap { aspect-ratio: 4 / 3; min-height: 0; }
+      .product-body { padding: 15px; }
+      .product-description { min-height: 0; margin-bottom: 12px; font-size: .78rem; }
+      .card-badge { top: 7px; left: 7px; padding: 4px 6px; font-size: .59rem; }
+      .delivery-side { grid-template-columns: 1fr; }
+      .cep-row { flex-direction: column; }
+      .form-grid, .payment-options { grid-template-columns: 1fr; }
+      .form-grid .span-two { grid-column: auto; }
+      .manager-heading, .manager-login { display: block; }
+      .manager-heading p { margin-top: 14px; }
+      .manager-login .field-label { margin-top: 18px; }
+      .manager-login .button { width: 100%; margin-top: 12px; }
+      .manager-orders { overflow-x: auto; }
+      .manager-order { min-width: 740px; }
+      .footer-main { grid-template-columns: 1fr; gap: 27px; }
+      .footer-bottom { flex-direction: column; }
+      .product-title { font-size: 1.04rem; }
+      .drawer-form-grid, .drawer-payment-options { grid-template-columns: 1fr; }
+      .drawer-form-grid .span-two { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navegação principal">
+      <a class="brand" href="#inicio" aria-label="Hamburgueria Na Brasa - página inicial"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M11 20.5C12.8 14.7 18 11.5 24 11.5s11.2 3.2 13 9H11Z" fill="#F9E8A2" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 25h24l-3 5H15l-3-5Z" fill="#6E381B" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 31h24v4H12z" fill="#F5C70D" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M15 39h18M18 35l-4 6M24 35v6M30 35l4 6" stroke="#171510" stroke-width="2.4" stroke-linecap="round"/><path d="M24 8c-2.3-2.4-1.1-5.2 1.2-6.5-.2 2.3 2.8 3.8 1.6 6.5-.5 1.1-1.2 1.8-2.8 2.7Z" fill="#E85D1F"/></svg></span><span>Hamburgueria<br>Na Brasa</span></a>
+      <div class="nav-links">
+        <a href="cardapio.html">Cardápio</a>
+        <a href="#sobre">A casa</a>
+        <a href="#acompanhar">Acompanhar pedido</a>
+      </div>
+      <button class="cart-toggle" type="button" id="open-cart" aria-label="Abrir sacola"><span>Sacola</span><span class="cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6.1 8.3h11.8l-1.1 10.3H7.2L6.1 8.3Z" fill="#D83727" stroke="#171510" stroke-width="1.55" stroke-linejoin="round"/><path d="M9 8.3V6.5a3 3 0 0 1 6 0v1.8" stroke="#F9D84F" stroke-width="1.7" stroke-linecap="round"/><path d="M9.2 12.7h5.6M10 14.7h4" stroke="#F9D84F" stroke-width="1.2" stroke-linecap="round"/></svg></span><span class="cart-count" id="cart-count">0</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <img class="hero-photo" src="https://images.unsplash.com/photo-1610440042657-612c34d95e9f?auto=format&fit=crop&w=1920&q=90" alt="Hambúrguer artesanal com queijo e salada" fetchpriority="high">
+      <div class="hero-content container">
+        <p class="eyebrow">Hamburgueria Na Brasa • Lavras, MG</p>
+        <h1 id="hero-title">A brasa acendeu.<br><em>A fome bateu.</em></h1>
+        <p class="hero-copy">Carne selada no fogo, pão tostado e ingredientes no ponto certo. Peça a assinatura da Na Brasa sem sair de casa.</p>
+        <div class="hero-actions">
+          <a class="button" href="cardapio.html">Ver cardápio <span aria-hidden="true">→</span></a>
+          <button class="button dark" id="hero-whatsapp" type="button">Pedir pelo WhatsApp <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="hero-quick-info" aria-label="Informações rápidas">
+          <div class="quick-info"><span class="quick-dot"></span> Todos os dias • 18h às 23h30</div>
+          <div class="quick-info"><span class="quick-dot"></span> Entrega em Lavras</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="combos" aria-labelledby="promos-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Do fogo para a sua mesa</p>
+          <h2>Combos e promoções para matar a fome.</h2>
+          <p>Escolha uma oferta e monte sua sacola. O cardápio completo, com burgers, batatas e bebidas, está em uma página exclusiva.</p>
+        </div>
+        <section class="promos-section" aria-labelledby="promos-title">
+          <div class="promos-heading"><div><p class="eyebrow">Economize no pedido</p><h3 id="promos-title">Combos & promoções.</h3></div><p>Combos com sanduíche, batata e refrigerante, além de uma oferta individual do dia.</p></div>
+          <div class="promos-grid" id="promos-grid" aria-live="polite"></div>
+        </section>
+        <p class="menu-note"><a href="cardapio.html" style="color:var(--yellow);font-weight:800">Abrir o cardápio completo →</a></p>
+      </div>
+    </section>
+
+    <section class="feature-section" aria-label="Destaque do cardápio">
+      <div class="features">
+        <div class="feature-image" role="img" aria-label="Hambúrguer e batata frita"></div>
+        <div class="feature-copy">
+          <p class="eyebrow">Favorito da galera</p>
+          <h2>Duplo Na Brasa.<br>Fogo em dobro.</h2>
+          <p>Dois smash burgers, cheddar em dobro, bacon estalando e o molho da casa que está conquistando Lavras.</p>
+          <ul class="feature-points">
+            <li><span class="check">✓</span> Blend de carne bovina selecionada</li>
+            <li><span class="check">✓</span> Pão brioche macio e tostado</li>
+            <li><span class="check">✓</span> Monte seu combo com batata e refrigerante</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="delivery-section" id="sobre" aria-labelledby="story-title">
+      <div class="container delivery-layout">
+        <article class="delivery-card">
+          <p class="eyebrow">Entrega em Lavras</p>
+          <h2 id="delivery-title">Consulte a taxa pelo seu CEP.</h2>
+          <p>Informe seu CEP para receber uma estimativa da entrega antes de fechar o pedido. A gente atende Lavras e regiões próximas.</p>
+          <div class="cep-row">
+            <label class="field-label" for="quick-cep" style="flex:1">Seu CEP
+              <input class="field-input" id="quick-cep" inputmode="numeric" autocomplete="postal-code" maxlength="9" placeholder="37200-000">
+            </label>
+            <button class="button" style="align-self:end" type="button" id="quick-cep-button">Calcular</button>
+          </div>
+          <div class="delivery-response" id="quick-delivery-response"><span aria-hidden="true">📍</span><span>Digite seu CEP para calcular a taxa de entrega.</span></div>
+          <p class="tiny-note">Taxa estimada: até 3 km R$ 5,99 • 3 a 6 km R$ 8,99 • 6 a 9 km R$ 11,99.</p>
+        </article>
+        <aside class="delivery-side" aria-label="Informações de delivery">
+          <div class="delivery-stat"><span class="delivery-stat-icon" aria-hidden="true">🛵</span><div><strong>Em até 45 minutos</strong><p>Tempo médio após a confirmação.</p></div></div>
+          <div class="delivery-stat"><span class="delivery-stat-icon" aria-hidden="true">📍</span><div><strong>Lavras, Minas Gerais</strong><p>Do Centro aos bairros mais distantes.</p></div></div>
+          <div class="delivery-stat"><span class="delivery-stat-icon" aria-hidden="true">💬</span><div><strong>Fora da área?</strong><p>Chame no WhatsApp e veja se conseguimos te atender.</p></div></div>
+        </aside>
+      </div>
+      <div class="container brand-story">
+        <article class="brand-story-copy">
+          <p class="eyebrow">Da brasa para Lavras</p>
+          <h2 id="story-title">O cheiro da brasa chama. O sabor faz ficar.</h2>
+          <p>Na Hamburgueria Na Brasa, cada burger é selado no fogo, montado sem pressa e servido com atitude. É comida de verdade para uma fome de verdade.</p>
+          <div class="brand-story-badges"><span class="brand-story-badge">Carne na brasa</span><span class="brand-story-badge">Pão tostado na hora</span><span class="brand-story-badge">Combos para compartilhar</span></div>
+        </article>
+        <aside class="brand-story-aside" aria-label="Informações da Hamburgueria Na Brasa">
+          <article class="brand-story-card"><span aria-hidden="true">🪵</span><div><strong>Fogo de verdade</strong><p>O ponto certo para cada burger.</p></div></article>
+          <article class="brand-story-card"><span aria-hidden="true">📍</span><div><strong>Rua da Brasa, 88</strong><p>Centro • Lavras, MG</p></div></article>
+          <article class="brand-story-card"><span aria-hidden="true">🕕</span><div><strong>Todos os dias</strong><p>Das 18h às 23h30.</p></div></article>
+        </aside>
+      </div>
+    </section>
+
+    <section class="checkout-section" id="checkout" aria-labelledby="checkout-title">
+      <div class="container checkout-layout">
+        <article class="checkout-card">
+          <p class="eyebrow">Finalizar pedido</p>
+          <h2 id="checkout-title">Quase lá, na brasa.</h2>
+          <p>Informe os dados para receber seu pedido. Você também pode enviar a sacola direto para nosso WhatsApp.</p>
+          <form id="order-form">
+            <div class="form-grid">
+              <label class="field-label" for="customer-name">Seu nome
+                <input class="field-input" id="customer-name" name="name" autocomplete="name" required placeholder="Como podemos te chamar?">
+              </label>
+              <label class="field-label" for="customer-phone">WhatsApp
+                <input class="field-input" id="customer-phone" name="phone" inputmode="tel" autocomplete="tel" required placeholder="(35) 99999-0000">
+              </label>
+              <label class="field-label" for="customer-cep">CEP
+                <input class="field-input" id="customer-cep" name="cep" inputmode="numeric" autocomplete="postal-code" maxlength="9" required placeholder="37200-000">
+              </label>
+              <label class="field-label" for="customer-number">Número
+                <input class="field-input" id="customer-number" name="number" required placeholder="Ex.: 248">
+              </label>
+              <label class="field-label span-two" for="customer-address">Rua, bairro e complemento
+                <input class="field-input" id="customer-address" name="address" autocomplete="street-address" required placeholder="Ex.: Av. Sabor Mineiro, Centro, apto. 12">
+              </label>
+              <label class="field-label span-two" for="customer-reference">Ponto de referência <span style="color:#888;font-weight:600">(opcional)</span>
+                <input class="field-input" id="customer-reference" name="reference" placeholder="Ex.: portão preto, perto da praça">
+              </label>
+              <div class="span-two">
+                <span class="field-label" style="margin-bottom:7px">Forma de pagamento</span>
+                <div class="payment-options">
+                  <label class="payment-option"><input type="radio" name="payment" value="Pix" checked> <span>⚡ Pix na confirmação</span></label>
+                </div>
+              </div>
+              <label class="payment-option span-two" id="age-verification" hidden><input type="checkbox" id="age-confirmation"> <span>🔞 Confirmo que tenho 18 anos ou mais para incluir cerveja no pedido.</span></label>
+              <label class="field-label span-two" for="customer-notes">Observações do pedido <span style="color:#888;font-weight:600">(opcional)</span>
+                <textarea class="field-input" id="customer-notes" name="notes" placeholder="Ex.: sem cebola, molho à parte..."></textarea>
+              </label>
+            </div>
+            <div class="checkout-actions">
+              <button class="button" type="submit">Confirmar pedido <span aria-hidden="true">→</span></button>
+              <button class="outline-button" type="button" id="checkout-whatsapp">💬 Pedir pelo WhatsApp</button>
+            </div>
+          </form>
+          <div class="order-confirmation" id="order-confirmation" role="status"></div>
+        </article>
+        <aside class="order-summary" aria-label="Resumo do pedido">
+          <div class="summary-head"><h3>Sua sacola <span aria-hidden="true">🛍️</span></h3></div>
+          <div class="summary-items" id="summary-items"></div>
+          <div class="summary-footer">
+            <div class="summary-line"><span>Subtotal</span><strong id="summary-subtotal">R$ 0,00</strong></div>
+            <div class="summary-line"><span>Entrega</span><strong id="summary-delivery">A calcular</strong></div>
+            <div class="summary-line total"><span>Total</span><strong id="summary-total">R$ 0,00</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tracking-section" id="acompanhar" aria-labelledby="tracking-title">
+      <div class="container tracking-layout">
+        <div>
+          <p class="eyebrow">Acompanhe seu pedido</p>
+          <h2 id="tracking-title">Seu lanche já está vindo?</h2>
+          <p>Depois de confirmar o pedido, você recebe um código. Digite-o aqui para saber se ele está recebido, na chapa ou a caminho.</p>
+        </div>
+        <div class="tracking-box">
+          <label class="field-label" for="track-order">Código do pedido
+            <div class="track-input-wrap"><input class="field-input" id="track-order" placeholder="Ex.: NB123456"><button class="button" type="button" id="track-button">Ver status</button></div>
+          </label>
+          <div class="track-result" id="track-result"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="manager-section" id="gerente" aria-labelledby="manager-title">
+      <div class="container">
+        <div class="manager-heading">
+          <div><p class="eyebrow">Área reservada</p><h2 id="manager-title">Painel do gerente.</h2></div>
+          <p>Controle os pedidos e atualize o status para manter cada cliente informado — recebido, em preparo, saiu para entrega e mais.</p>
+        </div>
+        <div class="manager-login" id="manager-login">
+          <div><strong>Acesso da gerência</strong><p>Entre para ver os pedidos em andamento e mudar seus status.</p></div>
+          <div><label class="field-label" for="manager-email">E-mail da gerência
+            <input class="field-input" id="manager-email" type="email" autocomplete="username" placeholder="gerencia@seudominio.com">
+          </label><label class="field-label" for="manager-password">Senha
+            <input class="field-input" id="manager-password" type="password" autocomplete="current-password" placeholder="Sua senha segura">
+          </label><button class="button" id="manager-login-button" type="button" style="margin-top:9px">Entrar no painel</button><p class="manager-auth-message" id="manager-auth-message" role="status"></p></div>
+        </div>
+        <div class="manager-dashboard" id="manager-dashboard">
+          <div class="manager-dashboard-top"><p id="manager-order-count">0 pedidos em acompanhamento</p><button class="manager-logout" id="manager-logout" type="button">Sair do painel</button></div>
+          <div class="manager-orders" id="manager-orders"></div>
+        </div>
+        <p class="manager-security-label">Acesso restrito a contas autorizadas no Firebase. O painel confirma sua permissão antes de exibir pedidos.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-main">
+      <div><a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M11 20.5C12.8 14.7 18 11.5 24 11.5s11.2 3.2 13 9H11Z" fill="#F9E8A2" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 25h24l-3 5H15l-3-5Z" fill="#6E381B" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 31h24v4H12z" fill="#F5C70D" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M15 39h18M18 35l-4 6M24 35v6M30 35l4 6" stroke="#171510" stroke-width="2.4" stroke-linecap="round"/><path d="M24 8c-2.3-2.4-1.1-5.2 1.2-6.5-.2 2.3 2.8 3.8 1.6 6.5-.5 1.1-1.2 1.8-2.8 2.7Z" fill="#E85D1F"/></svg></span><span>Hamburgueria<br>Na Brasa</span></a><p class="footer-brand-copy">Sabor de brasa, ingredientes selecionados e a fome resolvida do jeito certo.</p></div>
+      <div><h3>Fale com a Na Brasa</h3><ul class="footer-list"><li><a href="https://www.instagram.com/hamburguerianabrasa.lavras/" target="_blank" rel="noreferrer">Instagram: @hamburguerianabrasa.lavras</a></li><li><a href="tel:+5535999990000">Telefone: (35) 99999-0000</a></li><li><a href="https://wa.me/5535999990000" target="_blank" rel="noreferrer">WhatsApp: (35) 99999-0000</a></li></ul></div>
+      <div><h3>Onde estamos</h3><ul class="footer-list"><li>Rua da Brasa, 88</li><li>Centro • Lavras, MG</li><li>Todos os dias • 18h às 23h30</li></ul></div>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 Hamburgueria Na Brasa. Feita para matar a fome.</span><span>Fotos de burgers: <a href="https://unsplash.com/license" target="_blank" rel="noreferrer">Unsplash</a> • Marcas e imagens de embalagens pertencem aos respectivos titulares.</span></div>
+  </footer>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Sacola de pedidos" aria-hidden="true">
+    <div class="drawer-head"><h2>Sua sacola</h2><button class="icon-close" id="close-cart" type="button" aria-label="Fechar sacola">×</button></div>
+    <div class="cart-list" id="cart-list"></div>
+    <div class="drawer-footer">
+      <div class="drawer-total"><span>Subtotal</span><span id="cart-subtotal">R$ 0,00</span></div>
+      <button class="button full" id="drawer-checkout-toggle" type="button">Finalizar pelo site <span aria-hidden="true">→</span></button>
+      <button class="outline-button full" id="drawer-whatsapp" type="button" style="margin-top:9px">💬 Enviar pedido pelo WhatsApp</button>
+      <a class="outline-button drawer-continue" href="cardapio.html">Continuar no cardápio</a>
+      <form class="drawer-checkout-form" id="drawer-order-form" hidden>
+        <h3>Dados para entrega</h3>
+        <p>Informe os dados e escolha como prefere pagar.</p>
+        <div class="drawer-form-grid">
+          <label class="field-label" for="drawer-customer-name">Seu nome
+            <input class="field-input" id="drawer-customer-name" name="name" autocomplete="name" required placeholder="Como podemos te chamar?">
+          </label>
+          <label class="field-label" for="drawer-customer-phone">WhatsApp
+            <input class="field-input" id="drawer-customer-phone" name="phone" inputmode="tel" autocomplete="tel" required placeholder="(35) 99999-0000">
+          </label>
+          <label class="field-label" for="drawer-customer-cep">CEP
+            <div class="drawer-cep-row"><input class="field-input" id="drawer-customer-cep" name="cep" inputmode="numeric" autocomplete="postal-code" required placeholder="37200-000"><button class="drawer-cep-button" id="drawer-cep-button" type="button">Calcular</button></div>
+          </label>
+          <label class="field-label span-two" for="drawer-customer-address">Endereço de entrega
+            <input class="field-input" id="drawer-customer-address" name="address" autocomplete="street-address" required placeholder="Rua, bairro e complemento">
+          </label>
+          <label class="field-label" for="drawer-customer-number">Número
+            <input class="field-input" id="drawer-customer-number" name="number" required placeholder="Ex.: 88">
+          </label>
+          <label class="field-label" for="drawer-customer-reference">Referência <span style="color:#999;font-weight:600">(opcional)</span>
+            <input class="field-input" id="drawer-customer-reference" name="reference" placeholder="Ex.: perto da praça">
+          </label>
+        </div>
+        <p class="drawer-delivery-response" id="drawer-delivery-response" role="status">Informe o CEP para calcular a taxa de entrega.</p>
+        <div>
+          <span class="field-label" style="margin-bottom:6px">Forma de pagamento</span>
+          <div class="drawer-payment-options">
+            <label class="drawer-payment-option"><input type="radio" name="payment" value="Pix" checked> <span>Pix</span></label>
+          </div>
+        </div>
+        <label class="drawer-payment-option" id="drawer-age-verification" hidden><input type="checkbox" id="drawer-age-confirmation"> <span>Confirmo que tenho 18 anos ou mais para itens alcoólicos.</span></label>
+        <button class="button full" type="submit">Confirmar pedido <span aria-hidden="true">→</span></button>
+      </form>
+      <div class="drawer-order-confirmation" id="drawer-order-confirmation" role="status"></div>
+        <p class="drawer-help">Pagamento via Pix. Após o pedido, a equipe confirma as instruções de pagamento.</p>
+    </div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app-config.js"></script>
+  <script>window.naBrasaFirebasePending = true;</script>
+  <script type="module" src="firebase-client.js"></script>
+  <script src="menu-data.js"></script>
+  <script>
+    const products = window.naBrasaProducts || [
+      { id: 'classic', category: 'tradicionais', categoryLabel: 'Tradicional', name: 'Clássico da Brasa', description: 'Burger bovino 120 g, cheddar, alface, tomate, picles e maionese da casa no brioche.', price: 26.90, image: 'https://images.unsplash.com/photo-1616764744576-595bf6752e2a?auto=format&fit=crop&w=700&q=82' },
+      { id: 'bacon', category: 'tradicionais', categoryLabel: 'Tradicional', name: 'X-Bacon da Casa', description: 'Burger bovino 120 g, cheddar cremoso, bacon crocante, cebola roxa e molho especial.', price: 29.90, image: 'https://images.unsplash.com/photo-1575980726530-4e673bfa0ad8?auto=format&fit=crop&w=700&q=82' },
+      { id: 'salad', category: 'tradicionais', categoryLabel: 'Tradicional', name: 'X-Salada Mineiro', description: 'Burger bovino, queijo minas, alface, tomate, milho e maionese temperada.', price: 28.90, image: 'https://images.unsplash.com/photo-1610440042657-612c34d95e9f?auto=format&fit=crop&w=700&q=82' },
+      { id: 'chicken', category: 'tradicionais', categoryLabel: 'Tradicional', name: 'Frango Crocante', description: 'Filé de frango empanado, cheddar, alface, tomate e maionese da casa.', price: 28.90, image: 'https://images.unsplash.com/photo-1578937014729-9221d7b0895d?auto=format&fit=crop&w=700&q=82' },
+      { id: 'double', category: 'tradicionais', categoryLabel: 'Tradicional', name: 'Duplo Na Brasa', description: 'Dois burgers smash, cheddar em dobro, bacon e o molho da casa.', price: 34.90, image: 'https://images.unsplash.com/photo-1563074408-455d75186f14?auto=format&fit=crop&w=700&q=82' },
+      { id: 'mineirinho', category: 'especiais', categoryLabel: 'Especial', name: 'Mineirinho Especial', description: 'Burger 160 g, queijo minas grelhado, bacon, rúcula e geleia de pimenta.', price: 36.90, image: 'https://images.unsplash.com/photo-1562823319-5e43e2022493?auto=format&fit=crop&w=700&q=82' },
+      { id: 'bbq', category: 'especiais', categoryLabel: 'Especial', name: 'Bruto Barbecue', description: 'Burger 180 g, cheddar, bacon, onion rings e barbecue defumado.', price: 39.90, image: 'https://images.unsplash.com/photo-1655895293506-6563d58372ec?auto=format&fit=crop&w=700&q=82' },
+      { id: 'rib', category: 'especiais', categoryLabel: 'Especial', name: 'Costela Fire', description: 'Blend de costela 160 g, provolone, cebola caramelizada e barbecue.', price: 41.90, image: 'https://images.unsplash.com/photo-1635452067171-5d71fa2807f2?auto=format&fit=crop&w=700&q=82' },
+      { id: 'spicy', category: 'especiais', categoryLabel: 'Especial', name: 'Picante Na Brasa', description: 'Burger 160 g, cheddar, bacon, jalapeño, cebola roxa e molho chipotle.', price: 37.90, image: 'https://images.unsplash.com/photo-1616764744576-595bf6752e2a?auto=format&fit=crop&w=700&q=82' },
+      { id: 'honey', category: 'especiais', categoryLabel: 'Especial', name: 'Chicken Honey Bacon', description: 'Frango crocante, bacon, cheddar, coleslaw e molho de mel e mostarda.', price: 35.90, image: 'https://images.unsplash.com/photo-1578937014729-9221d7b0895d?auto=format&fit=crop&w=700&q=82' },
+      { id: 'truffle', category: 'artesanais', categoryLabel: 'Artesanal', name: 'Trufado do Chef', description: 'Dois smash burgers, queijo prato, cebola caramelizada e maionese trufada.', price: 40.90, image: 'https://images.unsplash.com/photo-1563074408-455d75186f14?auto=format&fit=crop&w=700&q=82' },
+      { id: 'mushroom', category: 'artesanais', categoryLabel: 'Artesanal', name: 'Cogumelo & Provolone', description: 'Burger artesanal 180 g, cogumelos salteados, provolone e aioli de ervas.', price: 42.90, image: 'https://images.unsplash.com/photo-1562823319-5e43e2022493?auto=format&fit=crop&w=700&q=82' },
+      { id: 'lamb', category: 'artesanais', categoryLabel: 'Artesanal', name: 'Cordeiro da Serra', description: 'Burger de cordeiro, queijo minas padrão, cebola roxa, hortelã e molho cítrico.', price: 45.90, image: 'https://images.unsplash.com/photo-1575980726530-4e673bfa0ad8?auto=format&fit=crop&w=700&q=82' },
+      { id: 'three-cheese', category: 'artesanais', categoryLabel: 'Artesanal', name: 'Três Queijos', description: 'Burger 180 g, cheddar, muçarela, provolone, bacon e maionese defumada.', price: 39.90, image: 'https://images.unsplash.com/photo-1655895293506-6563d58372ec?auto=format&fit=crop&w=700&q=82' },
+      { id: 'veggie', category: 'artesanais', categoryLabel: 'Artesanal', name: 'Veggie da Horta', description: 'Burger de grão-de-bico e legumes, queijo vegano, rúcula, tomate e molho de ervas.', price: 34.90, image: 'https://images.unsplash.com/photo-1610440042657-612c34d95e9f?auto=format&fit=crop&w=700&q=82' }
+    ];
+
+    const CART_KEY = 'nabrasa-cart-v1';
+    const currency = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    let cart = loadJSON(CART_KEY, loadJSON('gordao-cart-v1', [])).filter(item => productById(item.id));
+    let deliveryFee = null;
+    let deliveryDescription = 'A calcular pelo CEP';
+    let toastTimer;
+    let firebaseClient = null;
+    let managerOrders = [];
+    let managerAuthUnsubscribe = null;
+
+    const $ = (selector) => document.querySelector(selector);
+    const escapeHTML = (value) => String(value ?? '').replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
+    function loadJSON(key, fallback) { try { const data = JSON.parse(localStorage.getItem(key)); return Array.isArray(data) ? data : fallback; } catch { return fallback; } }
+    function saveCart() { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+    function productById(id) { return products.find(product => product.id === id); }
+    function money(value) { return currency.format(value || 0); }
+    function cartSubtotal() { return cart.reduce((sum, item) => { const product = productById(item.id); return sum + (product ? product.price * item.quantity : 0); }, 0); }
+    function cartCount() { return cart.reduce((sum, item) => sum + item.quantity, 0); }
+    function cartHasAlcohol() { return cart.some(item => productById(item.id)?.alcohol); }
+    function showToast(message) { const toast = $('#toast'); toast.textContent = message; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2800); }
+    function firebaseAvailable() { return Boolean(firebaseClient?.available && firebaseClient?.appCheckConfigured); }
+    function firebaseErrorCode(error) { return String(error?.code || '').toLowerCase(); }
+    function firebaseErrorMessage(error, fallback) {
+      const code = firebaseErrorCode(error);
+      if (code.includes('invalid-credential') || code.includes('wrong-password') || code.includes('user-not-found')) return 'E-mail ou senha inválidos.';
+      if (code.includes('too-many-requests')) return 'Muitas tentativas. Aguarde alguns minutos e tente novamente.';
+      if (code.includes('permission-denied')) return 'Esta conta não tem permissão para acessar esta área.';
+      if (code.includes('unauthenticated')) return 'Entre novamente para continuar.';
+      return fallback;
+    }
+    function idempotencyKey() {
+      return window.crypto?.randomUUID?.() || `web-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    }
+
+    function renderPromotions() {
+      const promos = products.filter(product => ['combos', 'promocoes'].includes(product.category));
+      $('#promos-grid').innerHTML = promos.map(product => `
+        <article class="promo-card">
+          <div class="promo-image"><img src="${product.image}" alt="${escapeHTML(product.name)}" loading="lazy"><span class="promo-tag">${product.categoryLabel}</span></div>
+          <div class="promo-body"><h4>${product.name}</h4><p>${product.description}</p><div class="promo-bottom"><span class="promo-price">${money(product.price)}</span><button class="promo-add" type="button" data-add="${product.id}">Adicionar</button></div></div>
+        </article>`).join('');
+    }
+
+    function renderCart() {
+      const list = $('#cart-list');
+      const summary = $('#summary-items');
+      const subtotal = cartSubtotal();
+      $('#cart-count').textContent = cartCount();
+      $('#cart-subtotal').textContent = money(subtotal);
+      $('#summary-subtotal').textContent = money(subtotal);
+      $('#summary-delivery').textContent = deliveryFee === null ? 'A calcular' : money(deliveryFee);
+      $('#summary-total').textContent = money(subtotal + (deliveryFee || 0));
+      $('#age-verification').hidden = !cartHasAlcohol();
+      $('#drawer-age-verification').hidden = !cartHasAlcohol();
+      if (!cart.length) {
+        list.innerHTML = '<div class="cart-empty">🍔<br><br>Sua sacola está vazia.<br>Escolha um hambúrguer de respeito!</div>';
+        summary.innerHTML = '<p class="empty-summary">Sua sacola ainda está vazia.<br>Que tal começar pelo Duplo Na Brasa?</p>';
+        $('#drawer-order-form').hidden = true;
+        $('#drawer-checkout-toggle').innerHTML = 'Finalizar pelo site <span aria-hidden="true">→</span>';
+        return;
+      }
+      list.innerHTML = cart.map(item => {
+        const product = productById(item.id);
+        if (!product) return '';
+        return `<div class="cart-item"><img src="${product.image}" alt=""><div><h3>${product.name}</h3><p>${money(product.price)} cada</p><div class="quantity-controls"><button type="button" data-change="${product.id}" data-delta="-1" aria-label="Diminuir quantidade">−</button><span>${item.quantity}</span><button type="button" data-change="${product.id}" data-delta="1" aria-label="Aumentar quantidade">+</button></div></div><span class="cart-price">${money(product.price * item.quantity)}</span></div>`;
+      }).join('');
+      summary.innerHTML = cart.map(item => {
+        const product = productById(item.id);
+        if (!product) return '';
+        return `<div class="summary-item"><span class="summary-item-name"><span class="summary-item-quantity">${item.quantity}x</span> ${product.name}</span><strong>${money(product.price * item.quantity)}</strong></div>`;
+      }).join('');
+    }
+
+    function addToCart(id) {
+      const entry = cart.find(item => item.id === id);
+      if (entry) entry.quantity += 1;
+      else cart.push({ id, quantity: 1 });
+      saveCart(); renderCart(); $('#drawer-order-confirmation').classList.remove('visible'); showToast('Hambúrguer adicionado à sacola!');
+    }
+    function changeQuantity(id, delta) {
+      const entry = cart.find(item => item.id === id);
+      if (!entry) return;
+      entry.quantity += delta;
+      if (entry.quantity <= 0) cart = cart.filter(item => item.id !== id);
+      saveCart(); renderCart();
+    }
+    function openCart() { $('#cart-drawer').classList.add('open'); $('#drawer-backdrop').classList.add('visible'); $('#cart-drawer').setAttribute('aria-hidden', 'false'); }
+    function closeCart() { $('#cart-drawer').classList.remove('open'); $('#drawer-backdrop').classList.remove('visible'); $('#cart-drawer').setAttribute('aria-hidden', 'true'); }
+    function toggleDrawerCheckout() {
+      if (!cart.length) { showToast('Adicione um item à sacola antes de finalizar.'); return; }
+      const form = $('#drawer-order-form');
+      form.hidden = !form.hidden;
+      $('#drawer-checkout-toggle').innerHTML = form.hidden ? 'Finalizar pelo site <span aria-hidden="true">→</span>' : 'Fechar dados de entrega';
+      if (!form.hidden) $('#drawer-customer-name').focus();
+    }
+
+    function maskCep(input) {
+      const digits = input.value.replace(/\D/g, '').slice(0, 8);
+      input.value = digits.length > 5 ? `${digits.slice(0, 5)}-${digits.slice(5)}` : digits;
+      return digits;
+    }
+    function setDeliveryMessage(target, message, state = '') {
+      const baseClass = target?.id === 'drawer-delivery-response' ? 'drawer-delivery-response' : 'delivery-response';
+      target.className = `${baseClass}${state ? ` ${state}` : ''}`;
+      target.innerHTML = `<span aria-hidden="true">${state === 'success' ? '✓' : state === 'error' ? '!' : '📍'}</span><span>${message}</span>`;
+    }
+    function normalizeDeliveryQuote(result) {
+      const quote = result?.quote || result?.delivery || result || {};
+      const fee = Number(quote.fee ?? quote.deliveryFee ?? quote.amount);
+      if (!Number.isFinite(fee) || fee < 0) return null;
+      return { fee, zone: quote.zone || quote.area || quote.description || 'Lavras, MG' };
+    }
+    async function calculateDelivery(source = 'quick') {
+      const cepInput = source === 'quick' ? $('#quick-cep') : source === 'drawer' ? $('#drawer-customer-cep') : $('#customer-cep');
+      const deliveryResponse = source === 'drawer' ? $('#drawer-delivery-response') : $('#quick-delivery-response');
+      const cep = maskCep(cepInput);
+      if (cep.length !== 8) {
+        deliveryFee = null; deliveryDescription = 'A calcular pelo CEP'; renderCart();
+        setDeliveryMessage(deliveryResponse, 'Digite os 8 números do CEP para calcular a taxa.');
+        return;
+      }
+
+      if (!firebaseAvailable()) {
+        deliveryFee = null; deliveryDescription = 'Cotação segura indisponível'; renderCart();
+        setDeliveryMessage(deliveryResponse, window.naBrasaFirebasePending ? 'O checkout seguro está sendo preparado. Aguarde alguns segundos.' : 'A cotação segura está indisponível no momento. Tente novamente ou peça pelo WhatsApp.', 'error');
+        return;
+      }
+      let info;
+      try {
+        const quote = await firebaseClient.call('quoteDelivery', { cep });
+        info = normalizeDeliveryQuote(quote);
+        if (!info) {
+          deliveryFee = null; deliveryDescription = 'CEP fora da área de entrega'; renderCart();
+          setDeliveryMessage(deliveryResponse, escapeHTML(quote?.message || 'Ainda não atendemos este CEP automaticamente. Chame a Na Brasa no WhatsApp para consultar.'), 'error');
+          return;
+        }
+      } catch (error) {
+        deliveryFee = null; deliveryDescription = 'Cotação segura indisponível'; renderCart();
+        setDeliveryMessage(deliveryResponse, firebaseErrorMessage(error, 'Não foi possível calcular a entrega agora. Tente novamente ou peça pelo WhatsApp.'), 'error');
+        return;
+      }
+      deliveryFee = info.fee;
+      deliveryDescription = info.zone;
+      if (source === 'quick') {
+        $('#customer-cep').value = cepInput.value;
+        $('#drawer-customer-cep').value = cepInput.value;
+      } else if (source === 'drawer') {
+        $('#quick-cep').value = cepInput.value;
+        $('#customer-cep').value = cepInput.value;
+      } else {
+        $('#quick-cep').value = cepInput.value;
+        $('#drawer-customer-cep').value = cepInput.value;
+      }
+      setDeliveryMessage(deliveryResponse, `Entrega para ${info.zone}: <strong>${money(info.fee)}</strong>. Taxa estimada confirmada!`, 'success');
+      renderCart();
+      try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const address = await response.json();
+        if (!address.erro && address.localidade && address.localidade.toLowerCase().includes('lavras')) {
+          const addressInput = source === 'drawer' ? $('#drawer-customer-address') : $('#customer-address');
+          if (addressInput && !addressInput.value.trim()) addressInput.value = [address.logradouro, address.bairro].filter(Boolean).join(', ');
+        }
+      } catch (_) { /* A cotação já foi concluída no servidor. */ }
+    }
+
+    function orderItemsText(items = []) { return items.map(item => `${item.quantity || 1}x ${item.name || productById(item.id)?.name || 'Item'}`).join(' • '); }
+    const statuses = ['Recebido', 'Em preparo', 'Pronto para retirada', 'Saiu para entrega', 'Entregue', 'Cancelado'];
+    function statusMessage(status) {
+      return ({ 'Recebido': 'Pedido recebido! A Na Brasa já começa a preparar seu lanche.', 'Em preparo': 'Seu pedido está na chapa 🍔', 'Pronto para retirada': 'Seu pedido está prontinho para retirada!', 'Saiu para entrega': 'Seu pedido saiu para entrega! 🛵', 'Entregue': 'Bom apetite! Pedido entregue.', 'Cancelado': 'Este pedido foi cancelado. Fale com a gente para mais informações.' })[status] || 'Status atualizado.';
+    }
+    function managerOrderId(order) { return String(order?.orderId || order?.id || ''); }
+    function managerOrderCode(order) { return String(order?.code || order?.trackingCode || managerOrderId(order)); }
+    function managerOrderDate(order) {
+      const value = order?.createdAt || order?.createdAtLabel || order?.createdAtMs;
+      if (typeof value === 'string') return value;
+      if (typeof value === 'number') return new Date(value).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+      return 'Agora';
+    }
+    function renderManagerOrders() {
+      const orders = Array.isArray(managerOrders) ? managerOrders : [];
+      $('#manager-order-count').textContent = `${orders.filter(order => !['Entregue', 'Cancelado'].includes(order.status)).length} pedidos em acompanhamento`;
+      if (!orders.length) {
+        $('#manager-orders').innerHTML = '<p style="margin:0;padding:22px;color:#c2c2c2">Nenhum pedido em acompanhamento no momento.</p>';
+        return;
+      }
+      $('#manager-orders').innerHTML = orders.map(order => `
+        <article class="manager-order">
+          <div><span class="order-id">#${escapeHTML(managerOrderCode(order))}</span><span class="order-time">${escapeHTML(managerOrderDate(order))}</span></div>
+          <div class="order-client"><strong>${escapeHTML(order.customer?.name || order.name || 'Cliente')}</strong><small>${escapeHTML(order.customer?.address || order.address || '')}</small></div>
+          <span class="order-products">${escapeHTML(orderItemsText(order.items))}</span>
+          <select class="status-select" data-order-status="${escapeHTML(managerOrderId(order))}" aria-label="Status do pedido ${escapeHTML(managerOrderCode(order))}">${statuses.map(status => `<option${status === order.status ? ' selected' : ''}>${status}</option>`).join('')}</select>
+          <span aria-hidden="true">›</span>
+        </article>`).join('');
+    }
+    function setManagerVisible(visible) {
+      $('#manager-login').style.display = visible ? 'none' : 'grid';
+      $('#manager-dashboard').classList.toggle('visible', visible);
+      if (visible) renderManagerOrders();
+    }
+    function renderTrackedOrder(order, fallbackCode) {
+      const code = order?.code || order?.trackingCode || order?.id || fallbackCode;
+      const status = order?.status || 'Recebido';
+      $('#track-result').innerHTML = `<strong>Pedido #${escapeHTML(code)} • ${escapeHTML(status)}</strong>${escapeHTML(order?.message || statusMessage(status))}`;
+    }
+    async function trackOrder() {
+      const id = $('#track-order').value.trim().toUpperCase().replace('#', '');
+      const result = $('#track-result');
+      if (!id) { showToast('Digite o código do pedido para acompanhar.'); return; }
+      result.classList.add('visible');
+      if (!firebaseAvailable()) {
+        result.innerHTML = '<strong>Rastreio temporariamente indisponível.</strong>Tente novamente em alguns instantes ou chame a Na Brasa no WhatsApp.';
+        return;
+      }
+      try {
+        const response = await firebaseClient.call('trackOrder', { code: id });
+        const order = response?.order || response;
+        if (!order || response?.found === false) throw Object.assign(new Error('not-found'), { code: 'functions/not-found' });
+        renderTrackedOrder(order, id);
+      } catch (error) {
+        result.innerHTML = error?.code === 'functions/not-found'
+          ? '<strong>Pedido não encontrado.</strong>Confira o código ou chame a Na Brasa no WhatsApp.'
+          : `<strong>Não foi possível consultar o pedido.</strong>${escapeHTML(firebaseErrorMessage(error, 'Tente novamente em alguns instantes.'))}`;
+      }
+    }
+    function normalizeCreatedOrder(result) {
+      const order = result?.order || result || {};
+      const code = order.code || order.trackingCode || result?.code || result?.trackingCode || order.orderId || result?.orderId;
+      if (!code) throw new Error('O servidor não retornou o código do pedido.');
+      return { code: String(code), status: order.status || result?.status || 'Recebido' };
+    }
+    async function createOrder(payload) {
+      if (!firebaseAvailable()) {
+        throw Object.assign(new Error(window.naBrasaFirebasePending ? 'O checkout seguro ainda está sendo preparado.' : 'O checkout seguro está indisponível no momento.'), { code: 'firebase/unavailable' });
+      }
+      const result = await firebaseClient.call('createOrder', payload);
+      return normalizeCreatedOrder(result);
+    }
+    async function submitOrder(payload, onSuccess) {
+      try {
+        const result = await createOrder(payload);
+        cart = [];
+        saveCart();
+        renderCart();
+        onSuccess(result);
+        showToast('Pedido confirmado com sucesso!');
+        return result;
+      } catch (error) {
+        console.error('Não foi possível criar o pedido.', error);
+        showToast(firebaseErrorMessage(error, 'Não foi possível registrar o pedido. Tente novamente.'));
+        return null;
+      }
+    }
+    function whatsappMessage() {
+      if (!cart.length) return null;
+      const lines = cart.map(item => { const product = productById(item.id); return `• ${item.quantity}x ${product.name} — ${money(product.price * item.quantity)}`; });
+      const alcoholNote = cartHasAlcohol() ? '\n\nObs.: confirmo que sou maior de 18 anos para itens alcoólicos.' : '';
+      return `Olá, Hamburgueria Na Brasa! Quero fazer este pedido:\n\n${lines.join('\n')}\n\nSubtotal: ${money(cartSubtotal())}\n\nQuero combinar endereço, entrega e pagamento pelo WhatsApp.${alcoholNote}`;
+    }
+    function openWhatsApp() {
+      const message = whatsappMessage();
+      if (!message) { showToast('Adicione um hambúrguer à sacola antes de pedir.'); return; }
+      window.open(`https://wa.me/5535999990000?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+    }
+    function setManagerMessage(message = '') {
+      const target = $('#manager-auth-message');
+      if (target) target.textContent = message;
+    }
+    async function refreshManagerOrders() {
+      if (!firebaseAvailable() || !firebaseClient.user) {
+        managerOrders = [];
+        setManagerVisible(false);
+        return false;
+      }
+      try {
+        const response = await firebaseClient.call('listManagerOrders', {});
+        managerOrders = Array.isArray(response?.orders) ? response.orders : [];
+        setManagerVisible(true);
+        setManagerMessage('');
+        return true;
+      } catch (error) {
+        managerOrders = [];
+        setManagerVisible(false);
+        setManagerMessage(firebaseErrorMessage(error, 'Não foi possível carregar os pedidos agora.'));
+        return false;
+      }
+    }
+    function initializeFirebaseIntegration(client) {
+      firebaseClient = client;
+      if (!firebaseAvailable()) {
+        managerOrders = [];
+        setManagerVisible(false);
+        setManagerMessage(firebaseClient?.available ? 'Configure o App Check antes de liberar o painel da gerência.' : 'O acesso da gerência estará disponível após a publicação segura no Firebase.');
+        return;
+      }
+      managerAuthUnsubscribe?.();
+      managerAuthUnsubscribe = firebaseClient.onAuthStateChanged(async (user) => {
+        if (!user) {
+          managerOrders = [];
+          setManagerVisible(false);
+          setManagerMessage('Entre com a conta autorizada da gerência.');
+          return;
+        }
+        setManagerMessage('Verificando permissões da conta…');
+        await refreshManagerOrders();
+      });
+    }
+    async function managerLogin() {
+      const email = $('#manager-email').value.trim();
+      const password = $('#manager-password').value;
+      if (!firebaseAvailable()) {
+        setManagerMessage('O Firebase ainda não está disponível nesta página.');
+        return;
+      }
+      if (!email || !password) {
+        setManagerMessage('Informe o e-mail e a senha da gerência.');
+        return;
+      }
+      const button = $('#manager-login-button');
+      button.disabled = true;
+      setManagerMessage('Entrando…');
+      try {
+        await firebaseClient.signIn(email, password);
+        $('#manager-password').value = '';
+      } catch (error) {
+        setManagerMessage(firebaseErrorMessage(error, 'Não foi possível entrar. Tente novamente.'));
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    document.addEventListener('click', event => {
+      const addButton = event.target.closest('[data-add]');
+      if (addButton) addToCart(addButton.dataset.add);
+      const changeButton = event.target.closest('[data-change]');
+      if (changeButton) changeQuantity(changeButton.dataset.change, Number(changeButton.dataset.delta));
+    });
+    $('#open-cart').addEventListener('click', openCart);
+    $('#close-cart').addEventListener('click', closeCart);
+    $('#drawer-backdrop').addEventListener('click', closeCart);
+    $('#quick-cep-button').addEventListener('click', () => calculateDelivery('quick'));
+    $('#quick-cep').addEventListener('input', event => maskCep(event.target));
+    $('#quick-cep').addEventListener('change', () => calculateDelivery('quick'));
+    $('#customer-cep').addEventListener('input', event => maskCep(event.target));
+    $('#customer-cep').addEventListener('change', () => calculateDelivery('checkout'));
+    $('#drawer-cep-button').addEventListener('click', () => calculateDelivery('drawer'));
+    $('#drawer-customer-cep').addEventListener('input', event => maskCep(event.target));
+    $('#drawer-customer-cep').addEventListener('change', () => calculateDelivery('drawer'));
+    $('#drawer-checkout-toggle').addEventListener('click', toggleDrawerCheckout);
+    $('#drawer-whatsapp').addEventListener('click', openWhatsApp);
+    $('#drawer-order-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!cart.length) { showToast('Adicione pelo menos um item à sua sacola.'); return; }
+      const form = event.currentTarget;
+      if (!form.reportValidity()) return;
+      if (cartHasAlcohol() && !$('#drawer-age-confirmation').checked) { showToast('Confirme que tem 18 anos ou mais para incluir cerveja.'); $('#drawer-age-confirmation').focus(); return; }
+      const data = Object.fromEntries(new FormData(form));
+      const cep = maskCep($('#drawer-customer-cep'));
+      if (cep.length !== 8 || deliveryFee === null) { showToast('Calcule a taxa de entrega pelo CEP antes de confirmar.'); $('#drawer-customer-cep').focus(); return; }
+      const result = await submitOrder({
+        items: cart.map(({ id, quantity }) => ({ id, quantity })),
+        customer: { name: data.name, phone: data.phone, address: data.address, number: data.number, reference: data.reference || '' },
+        delivery: { cep, fee: deliveryFee, zone: deliveryDescription },
+        paymentMethod: 'PIX',
+        ageConfirmed: !cartHasAlcohol() || $('#drawer-age-confirmation').checked,
+        idempotencyKey: idempotencyKey()
+      }, order => {
+        form.reset();
+        form.hidden = true;
+        $('#drawer-checkout-toggle').innerHTML = 'Finalizar pelo site <span aria-hidden="true">→</span>';
+        const confirmation = $('#drawer-order-confirmation');
+        confirmation.innerHTML = `<strong>Pedido #${escapeHTML(order.code)} recebido!</strong>Pagamento por Pix selecionado. Use o código <strong>${escapeHTML(order.code)}</strong> para acompanhar o status.`;
+        confirmation.classList.add('visible');
+        $('#track-order').value = order.code;
+      });
+      if (result && firebaseClient?.user) refreshManagerOrders();
+    });
+    $('#checkout-whatsapp').addEventListener('click', openWhatsApp);
+    $('#hero-whatsapp').addEventListener('click', () => { if (cart.length) openWhatsApp(); else window.open('https://wa.me/5535999990000?text=' + encodeURIComponent('Olá, Hamburgueria Na Brasa! Quero ver as opções de hoje.'), '_blank', 'noopener'); });
+    $('#order-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!cart.length) { showToast('Adicione pelo menos um hambúrguer à sua sacola.'); return; }
+      const form = event.currentTarget;
+      if (!form.reportValidity()) return;
+      if (cartHasAlcohol() && !$('#age-confirmation').checked) { showToast('Confirme que tem 18 anos ou mais para incluir cerveja.'); $('#age-confirmation').focus(); return; }
+      const cep = maskCep($('#customer-cep'));
+      if (cep.length !== 8 || deliveryFee === null) { showToast('Calcule a taxa de entrega pelo CEP antes de confirmar.'); $('#customer-cep').focus(); return; }
+      const data = Object.fromEntries(new FormData(form));
+      const result = await submitOrder({
+        items: cart.map(({ id, quantity }) => ({ id, quantity })),
+        customer: { name: data.name, phone: data.phone, address: data.address, number: data.number, reference: data.reference || '' },
+        delivery: { cep, fee: deliveryFee, zone: deliveryDescription },
+        paymentMethod: 'PIX',
+        ageConfirmed: !cartHasAlcohol() || $('#age-confirmation').checked,
+        idempotencyKey: idempotencyKey()
+      }, order => {
+        form.reset();
+        const confirmation = $('#order-confirmation');
+        confirmation.innerHTML = `<strong>Pedido #${escapeHTML(order.code)} recebido!</strong>A Na Brasa já começa a preparar seu lanche. Use o código <strong>${escapeHTML(order.code)}</strong> para acompanhar o status.`;
+        confirmation.classList.add('visible');
+        $('#track-order').value = order.code;
+      });
+      if (result && firebaseClient?.user) refreshManagerOrders();
+    });
+    $('#track-button').addEventListener('click', trackOrder);
+    $('#track-order').addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); trackOrder(); } });
+    $('#manager-login-button').addEventListener('click', managerLogin);
+    $('#manager-password').addEventListener('keydown', event => { if (event.key === 'Enter') managerLogin(); });
+    $('#manager-logout').addEventListener('click', async () => {
+      if (firebaseAvailable()) await firebaseClient.signOut();
+      managerOrders = [];
+      setManagerVisible(false);
+      setManagerMessage('Você saiu do painel.');
+      showToast('Você saiu do painel.');
+    });
+    $('#manager-orders').addEventListener('change', async event => {
+      const selector = event.target.closest('[data-order-status]');
+      if (!selector) return;
+      const order = managerOrders.find(entry => managerOrderId(entry) === selector.dataset.orderStatus);
+      if (!order) return;
+      if (!firebaseAvailable()) { showToast('O Firebase precisa estar disponível para atualizar pedidos.'); renderManagerOrders(); return; }
+      selector.disabled = true;
+      try {
+        const response = await firebaseClient.call('updateOrderStatus', { orderId: managerOrderId(order), status: selector.value, note: '' });
+        const code = response?.code || response?.trackingCode || managerOrderCode(order);
+        await refreshManagerOrders();
+        showToast(`Pedido #${code} atualizado: ${selector.value}.`);
+        if ($('#track-order').value.trim().toUpperCase() === String(code).toUpperCase()) trackOrder();
+      } catch (error) {
+        showToast(firebaseErrorMessage(error, 'Não foi possível atualizar o pedido.'));
+        await refreshManagerOrders();
+      } finally {
+        selector.disabled = false;
+      }
+    });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeCart(); });
+
+    renderPromotions();
+    renderCart();
+    setManagerVisible(false);
+    if (window.naBrasaFirebase) initializeFirebaseIntegration(window.naBrasaFirebase);
+    else window.addEventListener('nabrasa-firebase-ready', event => initializeFirebaseIntegration(event.detail), { once: true });
+  </script>
+</body>
+</html>
