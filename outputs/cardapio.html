@@ -260,8 +260,12 @@
         const isPackshot = ['refrigerantes', 'cervejas', 'sucos'].includes(product.category);
         const isWhitePackshot = product.id === 'pepsi-black';
         const image = categoryVisuals[product.category] || product.image;
-        return `<article class="product-card" data-category="${safe(product.category)}"><div class="product-image-wrap${isPackshot ? ' packshot-wrap' : ''}${isWhitePackshot ? ' packshot-white' : ''}"><img class="product-image${isPackshot ? ' packshot' : ''}${isWhitePackshot ? ' packshot-white' : ''}" src="${image}" alt="${safe(product.name)}" loading="lazy"${isPackshot && !isWhitePackshot ? ' data-black-backdrop' : ''}><span class="card-badge">${safe(product.categoryLabel)}</span></div><div class="product-body"><h3 class="product-title">${safe(product.name)}</h3>${product.brand ? `<p class="product-brand">Marca original: ${safe(product.brand)}</p>` : ''}<p class="product-description">${safe(product.description)}</p><div class="product-bottom"><span class="price">${money(product.price)}</span><button class="add-button" type="button" data-add="${safe(product.id)}" aria-label="Adicionar ${safe(product.name)}">+</button></div></div></article>`;
+        return `<article class="product-card" data-category="${safe(product.category)}"><div class="product-image-wrap${isPackshot ? ' packshot-wrap' : ''}${isWhitePackshot ? ' packshot-white' : ''}"><img class="product-image${isPackshot ? ' packshot' : ''}${isWhitePackshot ? ' packshot-white' : ''}" src="${image}" alt="${safe(product.name)}" loading="lazy"${categoryVisuals[product.category] ? ` data-fallback-image="${safe(product.image)}"` : ''}${isPackshot && !isWhitePackshot ? ' data-black-backdrop' : ''}><span class="card-badge">${safe(product.categoryLabel)}</span></div><div class="product-body"><h3 class="product-title">${safe(product.name)}</h3>${product.brand ? `<p class="product-brand">Marca original: ${safe(product.brand)}</p>` : ''}<p class="product-description">${safe(product.description)}</p><div class="product-bottom"><span class="price">${money(product.price)}</span><button class="add-button" type="button" data-add="${safe(product.id)}" aria-label="Adicionar ${safe(product.name)}">+</button></div></div></article>`;
       }).join('');
+      document.querySelectorAll('[data-fallback-image]').forEach(image => image.addEventListener('error', () => {
+        image.removeAttribute('data-black-backdrop');
+        image.src = image.dataset.fallbackImage;
+      }, { once: true }));
       document.querySelectorAll('[data-black-backdrop]').forEach(applyBlackBackdrop);
     }
 
