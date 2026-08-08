@@ -1,0 +1,17 @@
+# Dependencies and Firebase local state
+functions/node_modules/
+node_modules/
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+
+# Never commit credentials, payment secrets, or runtime configuration.
+.env
+.env.*
+!.env.example
+service-account*.json
+*-service-account.json
+functions/.runtimeconfig.json
+
+# Pacotes para download são gerados localmente; o site é publicado pelos arquivos-fonte.
+outputs/*.zip

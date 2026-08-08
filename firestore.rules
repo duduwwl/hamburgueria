@@ -1,0 +1,44 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // Public catalogue data is deliberately read-only. Queries must include
+    // active == true, because Firestore rules are not filters.
+    match /products/{productId} {
+      allow get: if resource.data.active == true;
+      allow list: if resource.data.active == true;
+      allow create, update, delete: if false;
+    }
+
+    match /promotions/{promotionId} {
+      allow get: if resource.data.active == true;
+      allow list: if resource.data.active == true;
+      allow create, update, delete: if false;
+    }
+
+    // Orders are read and written exclusively by trusted Cloud Functions.
+    // The manager queue is returned by the authenticated listManagerOrders
+    // callable after it checks staff/{uid} on the server. Customer tracking is
+    // returned by trackOrder with only a minimal, non-PII status payload.
+    match /orders/{orderId} {
+      allow read, write: if false;
+    }
+
+    // A staff member can read their own profile only. Profile writes and all
+    // membership changes remain server-side operations.
+    match /staff/{userId} {
+      allow get: if signedIn() && request.auth.uid == userId;
+      allow list, create, update, delete: if false;
+    }
+
+    // Tracking maps, idempotency records, delivery settings, and every other
+    // collection are server-only by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
