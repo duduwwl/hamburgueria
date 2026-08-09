@@ -1,0 +1,106 @@
+name: Deploy Firebase (produção)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "outputs/**"
+      - "functions/**"
+      - "firebase.json"
+      - ".firebaserc"
+      - "firestore.rules"
+      - "firestore.indexes.json"
+      - "scripts/**"
+      - "FIREBASE_SETUP.md"
+      - ".github/workflows/firebase-deploy.yml"
+  workflow_dispatch:
+    inputs:
+      seed_catalog:
+        description: "Executar a carga inicial/atualização explícita do catálogo"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firebase-production
+  cancel-in-progress: false
+
+env:
+  FIREBASE_PROJECT_ID: hamburgueria-ee939
+
+jobs:
+  deploy-backend:
+    name: Backend confiável e regras
+    # Do not publish the production front-end before its protected order API.
+    # Functions require Blaze; the repository owner must deliberately enable
+    # this variable only after completing FIREBASE_SETUP.md.
+    if: vars.DEPLOY_FUNCTIONS == 'true'
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependências das Functions
+        run: npm install --prefix functions --no-audit --no-fund
+
+      - name: Validar sintaxe das Functions
+        run: npm --prefix functions run lint
+
+      # The JSON credential lives exclusively in GitHub Secrets. Never add it
+      # to this repository or to a local .env file.
+      - name: Autenticar no Google Cloud
+        id: google_auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HAMBURGUERIA_EE939 }}
+          create_credentials_file: true
+
+      - name: Publicar Functions, regras e índices
+        run: >-
+          npx --yes firebase-tools@14 deploy
+          --project "$FIREBASE_PROJECT_ID"
+          --only functions,firestore
+          --non-interactive
+
+      # This is intentionally manual. It is useful for the first deploy, but
+      # must not overwrite a manager's catalogue on every code push.
+      - name: Carregar catálogo quando solicitado
+        if: inputs.seed_catalog == true
+        env:
+          CONFIRM_SEED: hamburgueria-ee939
+        run: npm --prefix functions run seed:products
+
+  deploy-hosting:
+    name: Site público
+    needs: deploy-backend
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Autenticar no Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HAMBURGUERIA_EE939 }}
+
+      - name: Publicar Hosting depois do backend
+        run: >-
+          npx --yes firebase-tools@14 deploy
+          --project "$FIREBASE_PROJECT_ID"
+          --only hosting
+          --non-interactive

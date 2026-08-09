@@ -12,6 +12,5 @@ firebase-debug.*.log
 service-account*.json
 *-service-account.json
 functions/.runtimeconfig.json
-
 # Pacotes para download são gerados localmente; o site é publicado pelos arquivos-fonte.
 outputs/*.zip
