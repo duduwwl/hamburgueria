@@ -20,9 +20,9 @@
     .container { width:min(1180px,calc(100% - 40px)); margin:0 auto; }
     .site-header { position:sticky; top:0; z-index:20; background:rgba(16,16,15,.94); border-bottom:1px solid rgba(248,194,15,.25); backdrop-filter:blur(14px); }
     .nav { display:flex; min-height:73px; align-items:center; justify-content:space-between; gap:18px; }
-    .brand { display:inline-flex; align-items:center; gap:11px; color:var(--text); font-size:1.08rem; font-weight:950; line-height:1; letter-spacing:-.045em; }
-    .brand-mark { display:grid; width:39px; height:39px; place-items:center; border:2px solid var(--yellow); border-radius:50%; background:var(--yellow); color:#15140f; box-shadow:3px 3px 0 var(--text); }
-    .brand-mark svg { width:29px; height:29px; }
+    .brand { display:inline-flex; align-items:center; gap:12px; color:var(--text); font-size:1.06rem; font-weight:950; line-height:.96; letter-spacing:-.055em; text-transform:uppercase; }
+    .brand-mark { display:grid; width:44px; height:44px; place-items:center; border:1px solid #ffe270; border-radius:13px; background:linear-gradient(145deg,#ffda38 0%,#f2ab05 100%); color:#15140f; box-shadow:0 5px 0 #8c5c00,0 9px 17px rgba(0,0,0,.32); transform:rotate(-2deg); }
+    .brand-mark svg { width:32px; height:32px; filter:drop-shadow(0 1px 0 rgba(255,255,255,.45)); }
     .nav-links { display:flex; align-items:center; gap:23px; color:#c5c2b9; font-size:.89rem; font-weight:800; }
     .nav-links a:hover { color:var(--yellow); }
     .cart-toggle { display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:10px 15px; border:2px solid var(--yellow); border-radius:999px; background:var(--yellow); color:#171510; font-size:.87rem; font-weight:900; }
@@ -141,6 +141,7 @@
     .checkout-payment-note { margin:0; color:#bdb7a7; font-size:.68rem; line-height:1.35; }
     .checkout-submit { margin-top:1px; padding:12px 14px; font-size:.82rem; }
     .checkout-success { display:flex; align-items:flex-start; gap:10px; margin:11px 0; padding:12px; border:1px solid #6c5e1d; border-radius:12px; background:#26200b; }
+    .checkout-success[hidden] { display:none !important; }
     .checkout-success > span { display:grid; width:25px; height:25px; flex:0 0 25px; place-items:center; border-radius:50%; background:var(--yellow); color:var(--ink); font-size:.85rem; font-weight:950; }
     .checkout-success strong { display:block; color:#fff4c0; font-size:.8rem; }
     .checkout-success p { margin:3px 0 0; color:#e6d998; font-size:.69rem; line-height:1.38; }
@@ -255,18 +256,25 @@
     function renderMenu() {
       const sandwichCategories = ['tradicionais', 'especiais', 'artesanais'];
       const visible = category === 'sanduiches' ? products.filter(product => sandwichCategories.includes(product.category)) : products.filter(product => product.category === category);
-      const categoryVisuals = { tradicionais: 'assets/burger-tradicional-dark.png', especiais: 'assets/burger-especial-dark.png', artesanais: 'assets/burger-artesanal-dark.png' };
+      const categoryVisuals = { especiais: 'assets/burger-especial-dark.png', artesanais: 'assets/burger-artesanal-dark.png' };
+      const productVisuals = {
+        classic: 'assets/burger-tradicional-classic.png',
+        bacon: 'assets/burger-tradicional-bacon.png',
+        salad: 'assets/burger-tradicional-salada.png',
+        double: 'assets/burger-tradicional-duplo.png'
+      };
       $('#menu-grid').innerHTML = visible.map(product => {
         const isPackshot = ['refrigerantes', 'cervejas', 'sucos'].includes(product.category);
-        const isWhitePackshot = product.id === 'pepsi-black';
-        const image = categoryVisuals[product.category] || product.image;
-        return `<article class="product-card" data-category="${safe(product.category)}"><div class="product-image-wrap${isPackshot ? ' packshot-wrap' : ''}${isWhitePackshot ? ' packshot-white' : ''}"><img class="product-image${isPackshot ? ' packshot' : ''}${isWhitePackshot ? ' packshot-white' : ''}" src="${image}" alt="${safe(product.name)}" loading="lazy"${categoryVisuals[product.category] ? ` data-fallback-image="${safe(product.image)}"` : ''}${isPackshot && !isWhitePackshot ? ' data-black-backdrop' : ''}><span class="card-badge">${safe(product.categoryLabel)}</span></div><div class="product-body"><h3 class="product-title">${safe(product.name)}</h3>${product.brand ? `<p class="product-brand">Marca original: ${safe(product.brand)}</p>` : ''}<p class="product-description">${safe(product.description)}</p><div class="product-bottom"><span class="price">${money(product.price)}</span><button class="add-button" type="button" data-add="${safe(product.id)}" aria-label="Adicionar ${safe(product.name)}">+</button></div></div></article>`;
+        // Bebidas usam fundo branco uniforme para destacar as embalagens originais.
+        const isWhitePackshot = isPackshot;
+        const image = productVisuals[product.id] || categoryVisuals[product.category] || product.image;
+        const hasLocalVisual = Boolean(productVisuals[product.id] || categoryVisuals[product.category]);
+        return `<article class="product-card" data-category="${safe(product.category)}"><div class="product-image-wrap${isPackshot ? ' packshot-wrap' : ''}${isWhitePackshot ? ' packshot-white' : ''}"><img class="product-image${isPackshot ? ' packshot' : ''}${isWhitePackshot ? ' packshot-white' : ''}" src="${image}" alt="${safe(product.name)}" loading="lazy"${hasLocalVisual ? ` data-fallback-image="${safe(product.image)}"` : ''}><span class="card-badge">${safe(product.categoryLabel)}</span></div><div class="product-body"><h3 class="product-title">${safe(product.name)}</h3>${product.brand ? `<p class="product-brand">Marca original: ${safe(product.brand)}</p>` : ''}<p class="product-description">${safe(product.description)}</p><div class="product-bottom"><span class="price">${money(product.price)}</span><button class="add-button" type="button" data-add="${safe(product.id)}" aria-label="Adicionar ${safe(product.name)}">+</button></div></div></article>`;
       }).join('');
       document.querySelectorAll('[data-fallback-image]').forEach(image => image.addEventListener('error', () => {
         image.removeAttribute('data-black-backdrop');
         image.src = image.dataset.fallbackImage;
       }, { once: true }));
-      document.querySelectorAll('[data-black-backdrop]').forEach(applyBlackBackdrop);
     }
 
     function applyBlackBackdrop(image) {
@@ -417,6 +425,7 @@
     else window.addEventListener('nabrasa-firebase-ready', event => initializeFirebaseIntegration(event.detail), { once:true });
     installCheckoutFulfillment();
     setCheckoutFulfillment('DELIVERY');
+    $('#checkout-success').hidden = true;
     renderPromotions(); renderMenu(); renderCart();
   </script>
 </body>
