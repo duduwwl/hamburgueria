@@ -417,15 +417,20 @@
       .strip-item { font-size: .76rem; }
       .strip-item:nth-child(n+3) { display: none; }
       section { padding: 69px 0; }
-      .menu-grid { grid-template-columns: 1fr; gap: 15px; }
-      .promos-section { padding: 18px; }
+      .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+      .promos-section { padding: 14px; }
       .promos-heading { display: block; }
       .promos-heading > p { margin-top: 9px; text-align: left; }
-      .promos-grid { grid-template-columns: 1fr; }
+      .promos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
       .product-card { display: flex; flex-direction: column; min-height: 0; }
       .product-image-wrap { aspect-ratio: 4 / 3; min-height: 0; }
-      .product-body { padding: 15px; }
-      .product-description { min-height: 0; margin-bottom: 12px; font-size: .78rem; }
+      .product-body { padding: 12px; }
+      .product-title { font-size: .91rem; }
+      .product-description { min-height: 0; margin-bottom: 12px; font-size: .72rem; line-height: 1.35; }
+      .promo-body { padding: 10px; }
+      .promo-body h4 { font-size: .82rem; }
+      .promo-body p { font-size: .66rem; }
+      .promo-add { padding: 6px 7px; font-size: .65rem; }
       .card-badge { top: 7px; left: 7px; padding: 4px 6px; font-size: .59rem; }
       .delivery-side { grid-template-columns: 1fr; }
       .cep-row { flex-direction: column; }
