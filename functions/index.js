@@ -62,7 +62,7 @@ const DELIVERY_RULES = Object.freeze([
     feeCents: 599,
     minMinutes: 30,
     maxMinutes: 40,
-    description: "Centro e bairros próximos"
+    description: "Lavras, MG — Centro e região central"
   },
   {
     id: "lavras-intermediaria",
@@ -71,7 +71,7 @@ const DELIVERY_RULES = Object.freeze([
     feeCents: 899,
     minMinutes: 35,
     maxMinutes: 45,
-    description: "Bairros intermediários"
+    description: "Lavras, MG — bairros urbanos"
   },
   {
     id: "lavras-ampliada",
@@ -80,7 +80,7 @@ const DELIVERY_RULES = Object.freeze([
     feeCents: 1199,
     minMinutes: 40,
     maxMinutes: 55,
-    description: "Bairros mais distantes"
+    description: "Lavras, MG — bairros mais afastados"
   }
 ]);
 
@@ -93,8 +93,9 @@ const callableOptions = {
   // Register the reCAPTCHA/App Check provider in the web app before deploying.
   enforceAppCheck: true,
   cors: [
-    "https://hamburgeria-ee939.web.app",
-    "https://hamburgeria-ee939.firebaseapp.com",
+    "https://hamburgueria-ee939.web.app",
+    "https://hamburgueria-ee939.firebaseapp.com",
+    "https://duduwwl.github.io",
     /^http:\/\/localhost:\d+$/,
     /^http:\/\/127\.0\.0\.1:\d+$/
   ]
@@ -212,12 +213,17 @@ function normalizeStatus(value) {
 }
 
 function calculateDelivery(cep) {
+  // CEPs urbanos de Lavras, MG ficam no intervalo 37200-000 a 37209-999.
+  // A decisão é feita exclusivamente no servidor para impedir manipulação do frete.
+  if (!/^3720\d{4}$/.test(cep)) {
+    fail("failed-precondition", "Por enquanto a entrega está disponível somente em Lavras, MG (CEPs 37200-000 a 37209-999).");
+  }
   const cepPrefix = Number(cep.slice(0, 5));
   const rule = DELIVERY_RULES.find((entry) => (
     cepPrefix >= entry.minCepPrefix && cepPrefix <= entry.maxCepPrefix
   ));
   if (!rule) {
-    fail("failed-precondition", "No momento entregamos somente em Lavras, MG.");
+    fail("failed-precondition", "Por enquanto a entrega está disponível somente em Lavras, MG (CEPs 37200-000 a 37209-999).");
   }
 
   return {
