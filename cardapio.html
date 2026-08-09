@@ -20,9 +20,9 @@
     .container { width:min(1180px,calc(100% - 40px)); margin:0 auto; }
     .site-header { position:sticky; top:0; z-index:20; background:rgba(16,16,15,.94); border-bottom:1px solid rgba(248,194,15,.25); backdrop-filter:blur(14px); }
     .nav { display:flex; min-height:73px; align-items:center; justify-content:space-between; gap:18px; }
-    .brand { display:inline-flex; align-items:center; gap:11px; color:var(--text); font-size:1.08rem; font-weight:950; line-height:1; letter-spacing:-.045em; }
-    .brand-mark { display:grid; width:39px; height:39px; place-items:center; border:2px solid var(--yellow); border-radius:50%; background:var(--yellow); color:#15140f; box-shadow:3px 3px 0 var(--text); }
-    .brand-mark svg { width:29px; height:29px; }
+    .brand { display:inline-flex; align-items:center; gap:12px; color:var(--text); font-size:1.06rem; font-weight:950; line-height:.96; letter-spacing:-.055em; text-transform:uppercase; }
+    .brand-mark { display:grid; width:44px; height:44px; place-items:center; border:1px solid #ffe270; border-radius:13px; background:linear-gradient(145deg,#ffda38 0%,#f2ab05 100%); color:#15140f; box-shadow:0 5px 0 #8c5c00,0 9px 17px rgba(0,0,0,.32); transform:rotate(-2deg); }
+    .brand-mark svg { width:32px; height:32px; filter:drop-shadow(0 1px 0 rgba(255,255,255,.45)); }
     .nav-links { display:flex; align-items:center; gap:23px; color:#c5c2b9; font-size:.89rem; font-weight:800; }
     .nav-links a:hover { color:var(--yellow); }
     .cart-toggle { display:inline-flex; align-items:center; justify-content:center; gap:9px; padding:10px 15px; border:2px solid var(--yellow); border-radius:999px; background:var(--yellow); color:#171510; font-size:.87rem; font-weight:900; }
@@ -34,7 +34,7 @@
     .menu-hero .container { position:relative; z-index:1; display:grid; align-content:center; min-height:310px; padding:54px 0; }
     .eyebrow { display:inline-flex; align-items:center; gap:8px; margin:0 0 13px; color:#fbd855; font-size:.75rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
     .eyebrow::before { content:""; width:23px; height:3px; border-radius:99px; background:var(--yellow); }
-    h1 { max-width:690px; margin:0; font-family:Anton,Impact,"Arial Narrow",sans-serif; font-size:clamp(3.15rem,6vw,5rem); font-weight:400; line-height:.88; letter-spacing:.012em; text-transform:uppercase; }
+    h1 { max-width:690px; margin:0; font-family:Anton,Impact,"Arial Narrow",sans-serif; font-size:clamp(2.7rem,5.2vw,4.4rem); font-weight:400; line-height:.9; letter-spacing:.012em; text-transform:uppercase; }
     .hero-copy { max-width:615px; margin:18px 0 0; color:#e4e0d5; font-size:1rem; }
     .menu-main { padding:68px 0 88px; }
     .menu-heading { display:flex; align-items:end; justify-content:space-between; gap:23px; margin-bottom:25px; }
@@ -68,11 +68,17 @@
     .product-image-wrap { position:relative; aspect-ratio:4/3; overflow:hidden; background:#090909; }
     .product-image-wrap::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(0,0,0,.02) 35%,rgba(0,0,0,.47)); }
     .product-image { width:100%; height:100%; object-fit:cover; object-position:center 52%; filter:contrast(1.07) saturate(.9) brightness(.78); transition:transform .42s,filter .42s; }
-    .product-image-wrap.packshot-wrap { background:#f2f2ef; }
-    .product-image-wrap.packshot-wrap::after { background:linear-gradient(180deg,rgba(0,0,0,.01),rgba(0,0,0,.05)); }
-    .product-image.packshot { object-fit:contain; padding:0; background:#f2f2ef; filter:contrast(1.04) saturate(1.04) brightness(.97); }
+    .product-image-wrap.packshot-wrap { background:#050505; }
+    .product-image-wrap.packshot-wrap::after { background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.24)); }
+    .product-image.packshot { object-fit:contain; padding:13px; background:#050505; filter:contrast(1.04) saturate(1.04) brightness(.99); mix-blend-mode:normal; }
+    .product-image-wrap.packshot-wrap.packshot-white { background:#fff; }
+    .product-image-wrap.packshot-wrap.packshot-white::after { background:linear-gradient(180deg,rgba(0,0,0,.01),rgba(0,0,0,.08)); }
+    .product-image.packshot.packshot-white { background:#fff; }
     .product-card:hover .product-image { transform:scale(1.055); filter:contrast(1.12) saturate(.95) brightness(.86); }
     .product-card:hover .product-image.packshot { transform:scale(1.035); filter:contrast(1.06) saturate(1.08) brightness(1); }
+    .product-card[data-category="tradicionais"] .product-image { object-position:center 54%; }
+    .product-card[data-category="especiais"] .product-image { object-position:center 45%; filter:contrast(1.14) saturate(1.04) brightness(.82); }
+    .product-card[data-category="artesanais"] .product-image { object-position:center 50%; filter:contrast(1.09) saturate(.82) brightness(.76); }
     .card-badge { position:absolute; z-index:1; top:12px; left:12px; padding:6px 9px; border-radius:999px; background:var(--yellow); color:var(--ink); box-shadow:0 3px 9px rgba(0,0,0,.3); font-size:.66rem; font-weight:950; letter-spacing:.045em; text-transform:uppercase; }
     .product-body { display:flex; flex:1; flex-direction:column; padding:18px; }
     .product-title { margin:0 0 7px; color:var(--text); font-size:1.18rem; line-height:1.05; letter-spacing:-.045em; }
@@ -127,9 +133,15 @@
     .payment-option { display:flex; align-items:center; gap:8px; min-height:42px; padding:8px 10px; border:1px solid #625d50; border-radius:9px; background:#151411; color:var(--text); font-size:.76rem; font-weight:850; }
     .payment-option:has(input:checked) { border-color:var(--yellow); background:#2a230b; }
     .payment-option input { width:14px; height:14px; margin:0; accent-color:var(--yellow); }
+    .fulfillment-options { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+    .fulfillment-option { display:flex; align-items:center; gap:8px; min-height:42px; padding:8px 10px; border:1px solid #625d50; border-radius:9px; background:#151411; color:var(--text); font-size:.76rem; font-weight:850; cursor:pointer; }
+    .fulfillment-option:has(input:checked) { border-color:var(--yellow); background:#2a230b; }
+    .fulfillment-option input { width:14px; height:14px; margin:0; accent-color:var(--yellow); }
+    .checkout-pickup-note { margin:0; padding:10px; border:1px solid rgba(248,194,15,.45); border-radius:9px; background:#19170e; color:#f5dfa0; font-size:.71rem; line-height:1.4; }
     .checkout-payment-note { margin:0; color:#bdb7a7; font-size:.68rem; line-height:1.35; }
     .checkout-submit { margin-top:1px; padding:12px 14px; font-size:.82rem; }
     .checkout-success { display:flex; align-items:flex-start; gap:10px; margin:11px 0; padding:12px; border:1px solid #6c5e1d; border-radius:12px; background:#26200b; }
+    .checkout-success[hidden] { display:none !important; }
     .checkout-success > span { display:grid; width:25px; height:25px; flex:0 0 25px; place-items:center; border-radius:50%; background:var(--yellow); color:var(--ink); font-size:.85rem; font-weight:950; }
     .checkout-success strong { display:block; color:#fff4c0; font-size:.8rem; }
     .checkout-success p { margin:3px 0 0; color:#e6d998; font-size:.69rem; line-height:1.38; }
@@ -151,7 +163,7 @@
     </nav>
   </header>
   <main>
-    <section class="menu-hero" aria-labelledby="menu-title"><div class="container"><p class="eyebrow">Hamburgueria Na Brasa • Lavras, MG</p><h1 id="menu-title">Cardápio completo.</h1><p class="hero-copy">Escolha seu burger, complete com batata e mate a sede com as marcas que você já conhece. Tudo em uma página, do seu jeito.</p></div></section>
+    <section class="menu-hero" aria-labelledby="menu-title"><div class="container"><p class="eyebrow">Hamburgueria Na Brasa • Lavras, MG</p><h1 id="menu-title">Cardápio completo.</h1><p class="hero-copy">Burgers na brasa, acompanhamentos e bebidas para completar seu pedido.</p></div></section>
     <section class="menu-main" id="menu" aria-label="Itens do cardápio"><div class="container">
       <div class="menu-heading"><h2>É só escolher e colocar na sacola.</h2><p>As marcas de bebidas são identificadas no cardápio. Confira a disponibilidade no momento do pedido.</p></div>
       <section class="promos-section" aria-labelledby="promos-title"><div class="promos-heading"><div><p class="eyebrow">Economize no pedido</p><h3 id="promos-title">Combos & promoções.</h3></div><p>Combos com sanduíche, batata e refrigerante, além de uma oferta individual do dia.</p></div><div class="promos-grid" id="promos-grid" aria-live="polite"></div></section>
@@ -210,10 +222,86 @@
       target.className = `checkout-delivery-result${state ? ` ${state}` : ''}`;
       target.textContent = message;
     }
+    function checkoutFulfillment() {
+      return document.querySelector('input[name="checkout-fulfillment"]:checked')?.value || 'DELIVERY';
+    }
+    function setCheckoutFulfillment(mode) {
+      const delivery = mode === 'DELIVERY';
+      const cepField = $('#checkout-cep').closest('.checkout-field');
+      const addressField = $('#checkout-address').closest('.checkout-field');
+      const result = $('#checkout-delivery-result');
+      cepField.hidden = !delivery;
+      addressField.hidden = !delivery;
+      result.hidden = !delivery;
+      $('#checkout-cep').required = delivery;
+      $('#checkout-address').required = delivery;
+      if (!delivery) {
+        deliveryQuote = { fee: 0, zone: 'Retirada na loja — Rua da Brasa, 88', cep: '' };
+        $('#checkout-pickup-note').hidden = false;
+      } else {
+        deliveryQuote = null;
+        $('#checkout-pickup-note').hidden = true;
+        setCheckoutDeliveryResult('Informe o CEP para calcular a taxa de entrega.');
+      }
+    }
+    function installCheckoutFulfillment() {
+      const heading = $('#site-checkout .checkout-heading');
+      if (!heading || $('#checkout-fulfillment-options')) return;
+      const fragment = document.createElement('div');
+      fragment.id = 'checkout-fulfillment-options';
+      fragment.innerHTML = `<span class="payment-title">Como você quer receber?</span><div class="fulfillment-options" role="radiogroup" aria-label="Forma de recebimento"><label class="fulfillment-option"><input name="checkout-fulfillment" type="radio" value="DELIVERY" checked> Entrega com taxa</label><label class="fulfillment-option"><input name="checkout-fulfillment" type="radio" value="PICKUP"> Retirar na loja</label></div><p class="checkout-pickup-note" id="checkout-pickup-note" hidden>Retirada grátis na Rua da Brasa, 88 — Centro, Lavras, MG. Tempo estimado: 20 a 30 minutos.</p>`;
+      heading.after(fragment);
+      fragment.addEventListener('change', () => setCheckoutFulfillment(checkoutFulfillment()));
+    }
     function renderMenu() {
       const sandwichCategories = ['tradicionais', 'especiais', 'artesanais'];
       const visible = category === 'sanduiches' ? products.filter(product => sandwichCategories.includes(product.category)) : products.filter(product => product.category === category);
-      $('#menu-grid').innerHTML = visible.map(product => { const isPackshot = ['refrigerantes', 'cervejas', 'sucos'].includes(product.category); return `<article class="product-card"><div class="product-image-wrap${isPackshot ? ' packshot-wrap' : ''}"><img class="product-image${isPackshot ? ' packshot' : ''}" src="${product.image}" alt="${safe(product.name)}" loading="lazy"><span class="card-badge">${safe(product.categoryLabel)}</span></div><div class="product-body"><h3 class="product-title">${safe(product.name)}</h3>${product.brand ? `<p class="product-brand">Marca original: ${safe(product.brand)}</p>` : ''}<p class="product-description">${safe(product.description)}</p><div class="product-bottom"><span class="price">${money(product.price)}</span><button class="add-button" type="button" data-add="${safe(product.id)}" aria-label="Adicionar ${safe(product.name)}">+</button></div></div></article>`; }).join('');
+      const categoryVisuals = { especiais: 'assets/burger-especial-dark.png', artesanais: 'assets/burger-artesanal-dark.png' };
+      const productVisuals = {
+        classic: 'assets/burger-tradicional-classic.png',
+        bacon: 'assets/burger-tradicional-bacon.png',
+        salad: 'assets/burger-tradicional-salada.png',
+        double: 'assets/burger-tradicional-duplo.png'
+      };
+      $('#menu-grid').innerHTML = visible.map(product => {
+        const isPackshot = ['refrigerantes', 'cervejas', 'sucos'].includes(product.category);
+        // Bebidas usam fundo branco uniforme para destacar as embalagens originais.
+        const isWhitePackshot = isPackshot;
+        const image = productVisuals[product.id] || categoryVisuals[product.category] || product.image;
+        const hasLocalVisual = Boolean(productVisuals[product.id] || categoryVisuals[product.category]);
+        return `<article class="product-card" data-category="${safe(product.category)}"><div class="product-image-wrap${isPackshot ? ' packshot-wrap' : ''}${isWhitePackshot ? ' packshot-white' : ''}"><img class="product-image${isPackshot ? ' packshot' : ''}${isWhitePackshot ? ' packshot-white' : ''}" src="${image}" alt="${safe(product.name)}" loading="lazy"${hasLocalVisual ? ` data-fallback-image="${safe(product.image)}"` : ''}><span class="card-badge">${safe(product.categoryLabel)}</span></div><div class="product-body"><h3 class="product-title">${safe(product.name)}</h3>${product.brand ? `<p class="product-brand">Marca original: ${safe(product.brand)}</p>` : ''}<p class="product-description">${safe(product.description)}</p><div class="product-bottom"><span class="price">${money(product.price)}</span><button class="add-button" type="button" data-add="${safe(product.id)}" aria-label="Adicionar ${safe(product.name)}">+</button></div></div></article>`;
+      }).join('');
+      document.querySelectorAll('[data-fallback-image]').forEach(image => image.addEventListener('error', () => {
+        image.removeAttribute('data-black-backdrop');
+        image.src = image.dataset.fallbackImage;
+      }, { once: true }));
+    }
+
+    function applyBlackBackdrop(image) {
+      const paint = () => {
+        if (!image.naturalWidth || image.dataset.backdropReady) return;
+        const width = image.naturalWidth, height = image.naturalHeight;
+        const source = document.createElement('canvas'); source.width = width; source.height = height;
+        const context = source.getContext('2d', { willReadFrequently: true });
+        context.drawImage(image, 0, 0, width, height);
+        const pixels = context.getImageData(0, 0, width, height);
+        const data = pixels.data, visited = new Uint8Array(width * height), background = new Uint8Array(width * height), queue = [];
+        const isNeutralLight = index => {
+          const r = data[index * 4], g = data[index * 4 + 1], b = data[index * 4 + 2];
+          const brightness = (r + g + b) / 3, spread = Math.max(r, g, b) - Math.min(r, g, b);
+          return brightness > 116 && spread < 52;
+        };
+        const push = (x, y) => { const index = y * width + x; if (!visited[index] && isNeutralLight(index)) { visited[index] = 1; queue.push(index); } };
+        for (let x = 0; x < width; x++) { push(x, 0); push(x, height - 1); }
+        for (let y = 1; y < height - 1; y++) { push(0, y); push(width - 1, y); }
+        for (let cursor = 0; cursor < queue.length; cursor++) {
+          const index = queue[cursor], x = index % width, y = (index - x) / width; background[index] = 1;
+          if (x) push(x - 1, y); if (x + 1 < width) push(x + 1, y); if (y) push(x, y - 1); if (y + 1 < height) push(x, y + 1);
+        }
+        for (let index = 0; index < background.length; index++) if (background[index]) { const offset = index * 4; data[offset] = 0; data[offset + 1] = 0; data[offset + 2] = 0; data[offset + 3] = 255; }
+        context.putImageData(pixels, 0, 0); image.src = source.toDataURL('image/png'); image.dataset.backdropReady = 'true';
+      };
+      if (image.complete) paint(); else image.addEventListener('load', paint, { once: true });
     }
     function renderPromotions() {
       const promos = products.filter(product => ['combos', 'promocoes'].includes(product.category));
@@ -236,6 +324,9 @@
       setTimeout(() => $('#checkout-name').focus(), 0);
     }
     async function quoteCheckoutDelivery() {
+      if (checkoutFulfillment() === 'PICKUP') {
+        return { fee: 0, zone: 'Retirada na loja — Rua da Brasa, 88', cep: '' };
+      }
       const cep = maskCep($('#checkout-cep'));
       if (cep.length !== 8) {
         deliveryQuote = null;
@@ -282,7 +373,10 @@
       const form = event.currentTarget;
       if (!form.reportValidity()) return;
       if (cart.some(item => productById(item.id)?.alcohol) && !$('#checkout-age-confirmation').checked) { toast('Confirme que tem 18 anos ou mais para incluir cerveja.'); $('#checkout-age-confirmation').focus(); return; }
-      const quote = await quoteCheckoutDelivery();
+      const fulfillment = checkoutFulfillment();
+      const quote = fulfillment === 'PICKUP'
+        ? { fee: 0, zone: 'Retirada na loja — Rua da Brasa, 88', cep: '' }
+        : await quoteCheckoutDelivery();
       if (!quote) return;
       const data = Object.fromEntries(new FormData(form));
       const submit = form.querySelector('[type="submit"]');
@@ -290,8 +384,9 @@
       try {
         const order = await createOrder({
           items: cart.map(({ id, quantity }) => ({ id, quantity })),
-          customer: { name: data.name, phone: data.phone, address: data.address },
-          delivery: { cep: quote.cep, fee: quote.fee, zone: quote.zone },
+          customer: { name: data.name, phone: data.phone, address: fulfillment === 'DELIVERY' ? data.address : '' },
+          fulfillment,
+          delivery: fulfillment === 'DELIVERY' ? { cep: quote.cep, fee: quote.fee, zone: quote.zone } : {},
           paymentMethod: 'PIX',
           ageConfirmed: !cart.some(item => productById(item.id)?.alcohol) || $('#checkout-age-confirmation').checked,
           idempotencyKey: idempotencyKey()
@@ -302,7 +397,7 @@
         form.reset();
         form.hidden = true;
         deliveryQuote = null;
-        $('#checkout-success-text').textContent = `Pedido #${order.code} registrado para ${data.name}. Pagamento por Pix selecionado.`;
+        $('#checkout-success-text').textContent = `Pedido #${order.code} registrado para ${data.name}. ${fulfillment === 'PICKUP' ? 'Retirada na loja sem taxa.' : 'Entrega confirmada pelo CEP.'} Pagamento por Pix selecionado.`;
         $('#checkout-success').hidden = false;
         toast('Pedido confirmado com sucesso!');
       } catch (error) {
@@ -328,6 +423,9 @@
     }
     if (window.naBrasaFirebase) initializeFirebaseIntegration(window.naBrasaFirebase);
     else window.addEventListener('nabrasa-firebase-ready', event => initializeFirebaseIntegration(event.detail), { once:true });
+    installCheckoutFulfillment();
+    setCheckoutFulfillment('DELIVERY');
+    $('#checkout-success').hidden = true;
     renderPromotions(); renderMenu(); renderCart();
   </script>
 </body>

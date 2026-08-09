@@ -8,3 +8,9 @@
  */
 window.NABRASA_RECAPTCHA_SITE_KEY = '';
 
+/*
+ * Modo temporário para testar somente a interface do painel de gerente.
+ * Aceita qualquer e-mail e senha preenchidos, mas não concede acesso aos
+ * pedidos reais do Firebase. Antes de publicar, altere para false.
+ */
+window.NABRASA_DEMO_MANAGER_MODE = true;

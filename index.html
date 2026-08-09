@@ -49,9 +49,9 @@
 
     .site-header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94); backdrop-filter: blur(13px); border-bottom: 1px solid rgba(20,20,20,.08); }
     .nav { min-height: 73px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 950; font-size: 1.08rem; letter-spacing: -.045em; }
-    .brand-mark { display: grid; place-items: center; width: 39px; height: 39px; border: 2px solid var(--ink); border-radius: 50%; background: var(--yellow); box-shadow: 3px 3px 0 var(--ink); }
-    .brand-mark svg { width: 29px; height: 29px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 950; font-size: 1.06rem; line-height: .96; letter-spacing: -.055em; text-transform: uppercase; }
+    .brand-mark { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #ffe270; border-radius: 13px; background: linear-gradient(145deg,#ffda38 0%,#f2ab05 100%); box-shadow: 0 5px 0 #8c5c00,0 9px 17px rgba(0,0,0,.32); transform: rotate(-2deg); }
+    .brand-mark svg { width: 32px; height: 32px; filter: drop-shadow(0 1px 0 rgba(255,255,255,.45)); }
     .nav-links { display: flex; align-items: center; gap: 23px; color: #4b4b4b; font-size: .9rem; font-weight: 700; }
     .nav-links a:hover { color: #000; }
     .cart-toggle, .menu-toggle {
@@ -179,6 +179,11 @@
     .payment-option { position: relative; display: flex; align-items: center; gap: 10px; min-height: 55px; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 11px; color: #363636; font-size: .84rem; font-weight: 800; cursor: pointer; }
     .payment-option:has(input:checked) { border-color: var(--ink); background: #fff8d8; }
     .payment-option input { accent-color: var(--ink); }
+    .fulfillment-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .fulfillment-option { display: flex; align-items: center; gap: 10px; min-height: 55px; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 11px; color: #363636; font-size: .84rem; font-weight: 800; cursor: pointer; }
+    .fulfillment-option:has(input:checked) { border-color: var(--ink); background: #fff8d8; }
+    .fulfillment-option input { accent-color: var(--ink); }
+    .pickup-note { margin: 10px 0 0; padding: 11px 12px; border: 1px solid rgba(248,194,15,.65); border-radius: 10px; background: #2a230b; color: #fff0ab; font-size: .78rem; line-height: 1.42; }
     .checkout-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 23px; }
     .outline-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 15px; border: 1.5px solid var(--ink); border-radius: 11px; background: #fff; color: var(--ink); font-size: .84rem; font-weight: 900; }
     .outline-button:hover { background: #f4f4f4; }
@@ -280,6 +285,9 @@
     .drawer-payment-option { display: flex; align-items: center; gap: 7px; min-height: 42px; padding: 9px; border: 1px solid var(--line); border-radius: 9px; color: var(--white); font-size: .75rem; font-weight: 800; cursor: pointer; }
     .drawer-payment-option:has(input:checked) { border-color: var(--yellow); background: rgba(248,194,15,.12); }
     .drawer-payment-option input { accent-color: var(--yellow); }
+    .drawer-checkout-form .fulfillment-options { margin-bottom: 10px; }
+    .drawer-checkout-form .fulfillment-option { min-height: 42px; border-color: #625d50; background: #151411; color: #f4f1e8; font-size: .76rem; }
+    .drawer-checkout-form .fulfillment-option:has(input:checked) { border-color: var(--yellow); background: #2a230b; }
     .drawer-order-confirmation { display: none; margin-top: 13px; padding: 12px; border: 1px solid #4e9b6d; border-radius: 10px; background: #143827; color: #c5f0d3; font-size: .77rem; }
     .drawer-order-confirmation.visible { display: block; }
     .drawer-order-confirmation strong { display: block; margin-bottom: 3px; }
@@ -301,7 +309,7 @@
     body { background: var(--paper); color: var(--white); }
     .site-header { background: rgba(16, 16, 15, .94); border-bottom-color: rgba(248, 194, 15, .26); }
     .brand { color: var(--white); }
-    .brand-mark { border-color: var(--yellow); box-shadow: 3px 3px 0 var(--white); }
+    .brand-mark { border-color: #ffe270; box-shadow: 0 5px 0 #8c5c00,0 9px 17px rgba(0,0,0,.32); }
     .nav-links { color: #c6c3ba; }
     .nav-links a:hover { color: var(--yellow); }
     .cart-toggle { border-color: var(--yellow); background: var(--yellow); color: #161510; }
@@ -338,6 +346,9 @@
     .field-input { border-color: #5d5a50; background: #282620; color: var(--white); }
     .field-input::placeholder { color: #9a978e; }
     .field-input:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px rgba(248,194,15,.22); }
+    /* O painel de teste usa campos claros; o texto digitado precisa contrastar. */
+    .manager-login .field-input { background: #fff; color: #171717; caret-color: #171717; }
+    .manager-login .field-input::placeholder { color: #747474; opacity: 1; }
     .delivery-response { background: #2c260d; color: #f5db6a; }
     .delivery-response.success { background: #163d2a; color: #c5f0d3; }
     .delivery-response.error { background: #42201c; color: #ffc6bd; }
@@ -611,7 +622,7 @@
           <p>Controle os pedidos e atualize o status para manter cada cliente informado — recebido, em preparo, saiu para entrega e mais.</p>
         </div>
         <div class="manager-login" id="manager-login">
-          <div><strong>Acesso da gerência</strong><p>Entre para ver os pedidos em andamento e mudar seus status.</p></div>
+          <div><strong>Teste do painel da gerência</strong><p>Use qualquer e-mail e senha preenchidos para conhecer o painel.</p></div>
           <div><label class="field-label" for="manager-email">E-mail da gerência
             <input class="field-input" id="manager-email" type="email" autocomplete="username" placeholder="gerencia@seudominio.com">
           </label><label class="field-label" for="manager-password">Senha
@@ -622,7 +633,7 @@
           <div class="manager-dashboard-top"><p id="manager-order-count">0 pedidos em acompanhamento</p><button class="manager-logout" id="manager-logout" type="button">Sair do painel</button></div>
           <div class="manager-orders" id="manager-orders"></div>
         </div>
-        <p class="manager-security-label">Acesso restrito a contas autorizadas no Firebase. O painel confirma sua permissão antes de exibir pedidos.</p>
+        <p class="manager-security-label">Modo de demonstração ativo: os pedidos de teste não são enviados ao banco.</p>
       </div>
     </section>
   </main>
@@ -716,6 +727,8 @@
     let firebaseClient = null;
     let managerOrders = [];
     let managerAuthUnsubscribe = null;
+    let demoManagerSession = false;
+    const demoManagerMode = window.NABRASA_DEMO_MANAGER_MODE === true;
 
     const $ = (selector) => document.querySelector(selector);
     const escapeHTML = (value) => String(value ?? '').replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
@@ -757,7 +770,7 @@
       $('#cart-count').textContent = cartCount();
       $('#cart-subtotal').textContent = money(subtotal);
       $('#summary-subtotal').textContent = money(subtotal);
-      $('#summary-delivery').textContent = deliveryFee === null ? 'A calcular' : money(deliveryFee);
+      $('#summary-delivery').textContent = deliveryFee === null ? 'A calcular' : deliveryFee === 0 ? 'Retirada grátis' : money(deliveryFee);
       $('#summary-total').textContent = money(subtotal + (deliveryFee || 0));
       $('#age-verification').hidden = !cartHasAlcohol();
       $('#drawer-age-verification').hidden = !cartHasAlcohol();
@@ -803,6 +816,48 @@
       if (!form.hidden) $('#drawer-customer-name').focus();
     }
 
+    function fulfillmentValue(scope) {
+      return document.querySelector(`input[name="${scope}-fulfillment"]:checked`)?.value || 'DELIVERY';
+    }
+    function setFulfillment(scope, mode) {
+      const delivery = mode === 'DELIVERY';
+      const ids = scope === 'drawer'
+        ? ['drawer-customer-cep', 'drawer-customer-address', 'drawer-customer-number', 'drawer-customer-reference']
+        : ['customer-cep', 'customer-address', 'customer-number', 'customer-reference'];
+      ids.forEach(id => {
+        const input = $(`#${id}`);
+        const field = input?.closest('.field-label');
+        if (field) field.hidden = !delivery;
+        if (input && id !== 'customer-reference' && id !== 'drawer-customer-reference') input.required = delivery;
+      });
+      const response = scope === 'drawer' ? $('#drawer-delivery-response') : $('#quick-delivery-response');
+      const note = $(`#${scope}-pickup-note`);
+      if (response) response.hidden = !delivery;
+      if (note) note.hidden = delivery;
+      if (!delivery) {
+        deliveryFee = 0;
+        deliveryDescription = 'Retirada na loja — Rua da Brasa, 88';
+      } else {
+        deliveryFee = null;
+        deliveryDescription = 'A calcular pelo CEP';
+      }
+      renderCart();
+    }
+    function installFulfillmentOptions() {
+      const mainGrid = $('#order-form .form-grid');
+      if (mainGrid && !$('#checkout-fulfillment-options')) {
+        mainGrid.insertAdjacentHTML('afterbegin', `<div class="span-two" id="checkout-fulfillment-options"><span class="field-label" style="margin-bottom:7px">Como você quer receber?</span><div class="fulfillment-options" role="radiogroup" aria-label="Forma de recebimento"><label class="fulfillment-option"><input type="radio" name="checkout-fulfillment" value="DELIVERY" checked> Entrega com taxa</label><label class="fulfillment-option"><input type="radio" name="checkout-fulfillment" value="PICKUP"> Retirar na loja</label></div><p class="pickup-note" id="checkout-pickup-note" hidden>Retirada grátis na Rua da Brasa, 88 — Centro, Lavras, MG. Preparo estimado: 20 a 30 minutos.</p></div>`);
+        $('#checkout-fulfillment-options').addEventListener('change', () => setFulfillment('checkout', fulfillmentValue('checkout')));
+      }
+      const drawerForm = $('#drawer-order-form');
+      if (drawerForm && !$('#drawer-fulfillment-options')) {
+        drawerForm.querySelector('p')?.insertAdjacentHTML('afterend', `<div id="drawer-fulfillment-options"><span class="field-label" style="margin-bottom:6px">Como você quer receber?</span><div class="fulfillment-options" role="radiogroup" aria-label="Forma de recebimento"><label class="fulfillment-option"><input type="radio" name="drawer-fulfillment" value="DELIVERY" checked> Entrega com taxa</label><label class="fulfillment-option"><input type="radio" name="drawer-fulfillment" value="PICKUP"> Retirar na loja</label></div><p class="pickup-note" id="drawer-pickup-note" hidden>Retirada grátis na Rua da Brasa, 88 — Centro, Lavras, MG.</p></div>`);
+        $('#drawer-fulfillment-options').addEventListener('change', () => setFulfillment('drawer', fulfillmentValue('drawer')));
+      }
+      setFulfillment('checkout', 'DELIVERY');
+      setFulfillment('drawer', 'DELIVERY');
+    }
+
     function maskCep(input) {
       const digits = input.value.replace(/\D/g, '').slice(0, 8);
       input.value = digits.length > 5 ? `${digits.slice(0, 5)}-${digits.slice(5)}` : digits;
@@ -820,6 +875,12 @@
       return { fee, zone: quote.zone || quote.area || quote.description || 'Lavras, MG' };
     }
     async function calculateDelivery(source = 'quick') {
+      if (source !== 'quick' && fulfillmentValue(source === 'drawer' ? 'drawer' : 'checkout') === 'PICKUP') {
+        deliveryFee = 0;
+        deliveryDescription = 'Retirada na loja — Rua da Brasa, 88';
+        renderCart();
+        return { fee: 0, zone: deliveryDescription };
+      }
       const cepInput = source === 'quick' ? $('#quick-cep') : source === 'drawer' ? $('#drawer-customer-cep') : $('#customer-cep');
       const deliveryResponse = source === 'drawer' ? $('#drawer-delivery-response') : $('#quick-delivery-response');
       const cep = maskCep(cepInput);
@@ -887,7 +948,8 @@
     }
     function renderManagerOrders() {
       const orders = Array.isArray(managerOrders) ? managerOrders : [];
-      $('#manager-order-count').textContent = `${orders.filter(order => !['Entregue', 'Cancelado'].includes(order.status)).length} pedidos em acompanhamento`;
+      const statusForDisplay = order => order?.statusLabel || order?.status || 'Recebido';
+      $('#manager-order-count').textContent = `${orders.filter(order => !['Entregue', 'Cancelado'].includes(statusForDisplay(order))).length} pedidos em acompanhamento`;
       if (!orders.length) {
         $('#manager-orders').innerHTML = '<p style="margin:0;padding:22px;color:#c2c2c2">Nenhum pedido em acompanhamento no momento.</p>';
         return;
@@ -897,7 +959,7 @@
           <div><span class="order-id">#${escapeHTML(managerOrderCode(order))}</span><span class="order-time">${escapeHTML(managerOrderDate(order))}</span></div>
           <div class="order-client"><strong>${escapeHTML(order.customer?.name || order.name || 'Cliente')}</strong><small>${escapeHTML(order.customer?.address || order.address || '')}</small></div>
           <span class="order-products">${escapeHTML(orderItemsText(order.items))}</span>
-          <select class="status-select" data-order-status="${escapeHTML(managerOrderId(order))}" aria-label="Status do pedido ${escapeHTML(managerOrderCode(order))}">${statuses.map(status => `<option${status === order.status ? ' selected' : ''}>${status}</option>`).join('')}</select>
+          <select class="status-select" data-order-status="${escapeHTML(managerOrderId(order))}" aria-label="Status do pedido ${escapeHTML(managerOrderCode(order))}">${statuses.map(status => `<option${status === statusForDisplay(order) ? ' selected' : ''}>${status}</option>`).join('')}</select>
           <span aria-hidden="true">›</span>
         </article>`).join('');
     }
@@ -908,7 +970,7 @@
     }
     function renderTrackedOrder(order, fallbackCode) {
       const code = order?.code || order?.trackingCode || order?.id || fallbackCode;
-      const status = order?.status || 'Recebido';
+      const status = order?.statusLabel || order?.status || 'Recebido';
       $('#track-result').innerHTML = `<strong>Pedido #${escapeHTML(code)} • ${escapeHTML(status)}</strong>${escapeHTML(order?.message || statusMessage(status))}`;
     }
     async function trackOrder() {
@@ -975,6 +1037,10 @@
       if (target) target.textContent = message;
     }
     async function refreshManagerOrders() {
+      if (demoManagerMode && demoManagerSession) {
+        setManagerVisible(true);
+        return true;
+      }
       if (!firebaseAvailable() || !firebaseClient.user) {
         managerOrders = [];
         setManagerVisible(false);
@@ -995,6 +1061,11 @@
     }
     function initializeFirebaseIntegration(client) {
       firebaseClient = client;
+      if (demoManagerMode) {
+        setManagerVisible(false);
+        setManagerMessage('Modo de demonstração ativo: use qualquer e-mail e senha preenchidos para testar a tela.');
+        return;
+      }
       if (!firebaseAvailable()) {
         managerOrders = [];
         setManagerVisible(false);
@@ -1016,6 +1087,24 @@
     async function managerLogin() {
       const email = $('#manager-email').value.trim();
       const password = $('#manager-password').value;
+      if (demoManagerMode) {
+        if (!email || !password) {
+          setManagerMessage('Digite qualquer e-mail e qualquer senha para abrir o teste.');
+          return;
+        }
+        demoManagerSession = true;
+        if (!managerOrders.length) {
+          managerOrders = [{
+            id: 'demo-001', code: 'TESTE-001', status: 'Recebido', createdAt: new Date().toLocaleString('pt-BR'),
+            customer: { name: 'Cliente de teste', address: 'Retirada na loja' },
+            items: [{ name: 'Clássico da Brasa', quantity: 1 }]
+          }];
+        }
+        $('#manager-password').value = '';
+        setManagerVisible(true);
+        setManagerMessage('Modo de teste ativo. Alterações abaixo são apenas visuais e não mudam pedidos reais.');
+        return;
+      }
       if (!firebaseAvailable()) {
         setManagerMessage('O Firebase ainda não está disponível nesta página.');
         return;
@@ -1063,12 +1152,14 @@
       if (!form.reportValidity()) return;
       if (cartHasAlcohol() && !$('#drawer-age-confirmation').checked) { showToast('Confirme que tem 18 anos ou mais para incluir cerveja.'); $('#drawer-age-confirmation').focus(); return; }
       const data = Object.fromEntries(new FormData(form));
+      const fulfillment = fulfillmentValue('drawer');
       const cep = maskCep($('#drawer-customer-cep'));
-      if (cep.length !== 8 || deliveryFee === null) { showToast('Calcule a taxa de entrega pelo CEP antes de confirmar.'); $('#drawer-customer-cep').focus(); return; }
+      if (fulfillment === 'DELIVERY' && (cep.length !== 8 || deliveryFee === null)) { showToast('Calcule a taxa de entrega pelo CEP antes de confirmar.'); $('#drawer-customer-cep').focus(); return; }
       const result = await submitOrder({
         items: cart.map(({ id, quantity }) => ({ id, quantity })),
-        customer: { name: data.name, phone: data.phone, address: data.address, number: data.number, reference: data.reference || '' },
-        delivery: { cep, fee: deliveryFee, zone: deliveryDescription },
+        customer: { name: data.name, phone: data.phone, address: fulfillment === 'DELIVERY' ? data.address : '', number: fulfillment === 'DELIVERY' ? data.number : '', reference: fulfillment === 'DELIVERY' ? data.reference || '' : '' },
+        fulfillment,
+        delivery: fulfillment === 'DELIVERY' ? { cep, fee: deliveryFee, zone: deliveryDescription } : {},
         paymentMethod: 'PIX',
         ageConfirmed: !cartHasAlcohol() || $('#drawer-age-confirmation').checked,
         idempotencyKey: idempotencyKey()
@@ -1092,12 +1183,14 @@
       if (!form.reportValidity()) return;
       if (cartHasAlcohol() && !$('#age-confirmation').checked) { showToast('Confirme que tem 18 anos ou mais para incluir cerveja.'); $('#age-confirmation').focus(); return; }
       const cep = maskCep($('#customer-cep'));
-      if (cep.length !== 8 || deliveryFee === null) { showToast('Calcule a taxa de entrega pelo CEP antes de confirmar.'); $('#customer-cep').focus(); return; }
       const data = Object.fromEntries(new FormData(form));
+      const fulfillment = fulfillmentValue('checkout');
+      if (fulfillment === 'DELIVERY' && (cep.length !== 8 || deliveryFee === null)) { showToast('Calcule a taxa de entrega pelo CEP antes de confirmar.'); $('#customer-cep').focus(); return; }
       const result = await submitOrder({
         items: cart.map(({ id, quantity }) => ({ id, quantity })),
-        customer: { name: data.name, phone: data.phone, address: data.address, number: data.number, reference: data.reference || '' },
-        delivery: { cep, fee: deliveryFee, zone: deliveryDescription },
+        customer: { name: data.name, phone: data.phone, address: fulfillment === 'DELIVERY' ? data.address : '', number: fulfillment === 'DELIVERY' ? data.number : '', reference: fulfillment === 'DELIVERY' ? data.reference || '' : '' },
+        fulfillment,
+        delivery: fulfillment === 'DELIVERY' ? { cep, fee: deliveryFee, zone: deliveryDescription } : {},
         paymentMethod: 'PIX',
         ageConfirmed: !cartHasAlcohol() || $('#age-confirmation').checked,
         idempotencyKey: idempotencyKey()
@@ -1115,7 +1208,8 @@
     $('#manager-login-button').addEventListener('click', managerLogin);
     $('#manager-password').addEventListener('keydown', event => { if (event.key === 'Enter') managerLogin(); });
     $('#manager-logout').addEventListener('click', async () => {
-      if (firebaseAvailable()) await firebaseClient.signOut();
+      if (!demoManagerMode && firebaseAvailable()) await firebaseClient.signOut();
+      demoManagerSession = false;
       managerOrders = [];
       setManagerVisible(false);
       setManagerMessage('Você saiu do painel.');
@@ -1126,6 +1220,12 @@
       if (!selector) return;
       const order = managerOrders.find(entry => managerOrderId(entry) === selector.dataset.orderStatus);
       if (!order) return;
+      if (demoManagerMode && demoManagerSession) {
+        order.status = selector.value;
+        renderManagerOrders();
+        showToast(`Pedido de teste atualizado: ${selector.value}.`);
+        return;
+      }
       if (!firebaseAvailable()) { showToast('O Firebase precisa estar disponível para atualizar pedidos.'); renderManagerOrders(); return; }
       selector.disabled = true;
       try {
@@ -1143,6 +1243,7 @@
     });
     document.addEventListener('keydown', event => { if (event.key === 'Escape') closeCart(); });
 
+    installFulfillmentOptions();
     renderPromotions();
     renderCart();
     setManagerVisible(false);
