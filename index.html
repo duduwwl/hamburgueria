@@ -307,13 +307,16 @@
       --white: #f9f7f0;
     }
     body { background: var(--paper); color: var(--white); }
-    .site-header { background: rgba(16, 16, 15, .94); border-bottom-color: rgba(248, 194, 15, .26); }
+    .site-header { background: linear-gradient(90deg,rgba(12,12,11,.98),rgba(25,23,18,.95),rgba(12,12,11,.98)); border-bottom-color: rgba(248,194,15,.38); box-shadow:0 12px 28px rgba(0,0,0,.22); backdrop-filter:blur(18px); }
+    .nav { min-height:78px; }
     .brand { color: var(--white); }
     .brand-mark { border-color: #ffe270; box-shadow: 0 5px 0 #8c5c00,0 9px 17px rgba(0,0,0,.32); }
-    .nav-links { color: #c6c3ba; }
-    .nav-links a:hover { color: var(--yellow); }
-    .cart-toggle { border-color: var(--yellow); background: var(--yellow); color: #161510; }
-    .cart-toggle:hover { background: #ffda47; }
+    .nav-links { gap:3px; padding:5px; border:1px solid rgba(255,255,255,.11); border-radius:999px; background:rgba(255,255,255,.045); color:#d0cdc3; font-size:.79rem; font-weight:900; letter-spacing:.01em; }
+    .nav-links a { padding:9px 13px; border-radius:999px; transition:color .2s,background .2s,transform .2s; }
+    .nav-links a:hover { color:var(--yellow); transform:translateY(-1px); }
+    .nav-links a.active { background:var(--yellow); color:#171510; box-shadow:0 4px 11px rgba(248,194,15,.18); }
+    .cart-toggle { padding:11px 16px; border:1px solid #ffe06a; background:linear-gradient(135deg,#ffd52d,#f4b800); color:#171510; box-shadow:0 5px 0 #9d6900,0 10px 19px rgba(0,0,0,.22); font-size:.79rem; font-weight:950; letter-spacing:.045em; text-transform:uppercase; transition:transform .2s,filter .2s,box-shadow .2s; }
+    .cart-toggle:hover { transform:translateY(-2px); filter:brightness(1.05); box-shadow:0 7px 0 #9d6900,0 14px 23px rgba(0,0,0,.28); }
     .cart-count { background: #171612; color: var(--yellow); }
     .eyebrow { color: #f9d852; }
     .service-strip { background: #201900; border-bottom-color: var(--yellow); }
@@ -454,7 +457,8 @@
   <header class="site-header">
     <nav class="nav container" aria-label="Navegação principal">
       <a class="brand" href="#inicio" aria-label="Hamburgueria Na Brasa - página inicial"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M11 20.5C12.8 14.7 18 11.5 24 11.5s11.2 3.2 13 9H11Z" fill="#F9E8A2" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 25h24l-3 5H15l-3-5Z" fill="#6E381B" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 31h24v4H12z" fill="#F5C70D" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M15 39h18M18 35l-4 6M24 35v6M30 35l4 6" stroke="#171510" stroke-width="2.4" stroke-linecap="round"/><path d="M24 8c-2.3-2.4-1.1-5.2 1.2-6.5-.2 2.3 2.8 3.8 1.6 6.5-.5 1.1-1.2 1.8-2.8 2.7Z" fill="#E85D1F"/></svg></span><span>Hamburgueria<br>Na Brasa</span></a>
-      <div class="nav-links">
+      <div class="nav-links" aria-label="Navegação da loja">
+        <a class="active" href="#inicio">Início</a>
         <a href="cardapio.html">Cardápio</a>
         <a href="#sobre">A casa</a>
         <a href="#acompanhar">Acompanhar pedido</a>
