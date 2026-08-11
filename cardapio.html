@@ -256,12 +256,19 @@
     function renderMenu() {
       const sandwichCategories = ['tradicionais', 'especiais', 'artesanais'];
       const visible = category === 'sanduiches' ? products.filter(product => sandwichCategories.includes(product.category)) : products.filter(product => product.category === category);
-      const categoryVisuals = { especiais: 'assets/burger-especial-dark.png', artesanais: 'assets/burger-artesanal-dark.png' };
+      const categoryVisuals = {};
       const productVisuals = {
         classic: 'assets/burger-tradicional-classic.png',
         bacon: 'assets/burger-tradicional-bacon.png',
         salad: 'assets/burger-tradicional-salada.png',
-        double: 'assets/burger-tradicional-duplo.png'
+        double: 'assets/burger-tradicional-duplo.png',
+        bbq: 'assets/burger-especial-bbq.png',
+        rib: 'assets/burger-especial-costela.png',
+        spicy: 'assets/burger-especial-picante.png',
+        honey: 'assets/burger-especial-chicken.png',
+        truffle: 'assets/burger-artesanal-trufado.png',
+        mushroom: 'assets/burger-artesanal-defumado.png',
+        lamb: 'assets/burger-artesanal-cordeiro.png'
       };
       $('#menu-grid').innerHTML = visible.map(product => {
         const isPackshot = ['refrigerantes', 'cervejas', 'sucos'].includes(product.category);
