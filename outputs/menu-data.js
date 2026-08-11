@@ -32,10 +32,10 @@ window.naBrasaProducts = [
 ];
 
 window.naBrasaPromotions = [
-  { id: 'combo-classic', category: 'combos', categoryLabel: 'Combo', name: 'Combo Clássico', description: 'Clássico da Brasa + Batata Frita Crocante + Coca-Cola Original.', price: 39.90, image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=700&q=82' },
-  { id: 'combo-bacon', category: 'combos', categoryLabel: 'Combo', name: 'Combo Bacon', description: 'X-Bacon da Casa + Batata Cheddar & Bacon + Coca-Cola Sem Açúcar.', price: 49.90, image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=82' },
-  { id: 'combo-duplo', category: 'combos', categoryLabel: 'Combo', name: 'Combo Duplo', description: 'Duplo Na Brasa + Batata Frita Crocante + Guaraná Antarctica.', price: 45.90, image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=700&q=82' },
-  { id: 'promo-mineirinho', category: 'promocoes', categoryLabel: 'Oferta individual', name: 'Mineirinho Especial', description: 'Oferta individual do dia: de R$ 36,90 por R$ 31,90.', price: 31.90, image: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=700&q=82' }
+  { id: 'combo-classic', category: 'combos', categoryLabel: 'Combo', name: 'Combo Clássico', description: 'Clássico da Brasa + Batata Frita Crocante + Coca-Cola Original.', price: 39.90, image: 'assets/burger-tradicional-classic.png' },
+  { id: 'combo-bacon', category: 'combos', categoryLabel: 'Combo', name: 'Combo Bacon', description: 'X-Bacon da Casa + Batata Cheddar & Bacon + Coca-Cola Sem Açúcar.', price: 49.90, image: 'assets/burger-tradicional-bacon.png' },
+  { id: 'combo-duplo', category: 'combos', categoryLabel: 'Combo', name: 'Combo Duplo', description: 'Duplo Na Brasa + Batata Frita Crocante + Guaraná Antarctica.', price: 45.90, image: 'assets/burger-tradicional-duplo.png' },
+  { id: 'promo-mineirinho', category: 'promocoes', categoryLabel: 'Oferta individual', name: 'Mineirinho Especial', description: 'Oferta individual do dia: de R$ 36,90 por R$ 31,90.', price: 31.90, image: 'assets/burger-especial-dark.png' }
 ];
 
 window.naBrasaProducts.push(...window.naBrasaPromotions);
