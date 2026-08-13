@@ -49,9 +49,11 @@
 
     .site-header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94); backdrop-filter: blur(13px); border-bottom: 1px solid rgba(20,20,20,.08); }
     .nav { min-height: 73px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 950; font-size: 1.06rem; line-height: .96; letter-spacing: -.055em; text-transform: uppercase; }
-    .brand-mark { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #ffe270; border-radius: 13px; background: linear-gradient(145deg,#ffda38 0%,#f2ab05 100%); box-shadow: 0 5px 0 #8c5c00,0 9px 17px rgba(0,0,0,.32); transform: rotate(-2deg); }
-    .brand-mark svg { width: 32px; height: 32px; filter: drop-shadow(0 1px 0 rgba(255,255,255,.45)); }
+    .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--white); font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 1.08rem; line-height: .9; letter-spacing: .025em; text-transform: uppercase; }
+    .brand-name { display:grid; gap:2px; }
+    .brand-name small { color:#ffe69a; font-family: Inter,system-ui,sans-serif; font-size:.55rem; font-weight:950; letter-spacing:.17em; line-height:1; }
+    .brand-mark { display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid #ffe270; border-radius: 14px; background: radial-gradient(circle at 32% 24%,#fff0a4 0 6%,transparent 7%),linear-gradient(145deg,#ffd735 0%,#f0a800 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.58),0 5px 0 #8c5c00,0 10px 18px rgba(0,0,0,.32); transform: rotate(-2deg); }
+    .brand-mark svg { width: 37px; height: 37px; filter: drop-shadow(0 2px 0 rgba(255,255,255,.32)); }
     .nav-links { display: flex; align-items: center; gap: 23px; color: #4b4b4b; font-size: .9rem; font-weight: 700; }
     .nav-links a:hover { color: #000; }
     .cart-toggle, .menu-toggle {
@@ -63,14 +65,14 @@
     .cart-icon { display: grid; width: 18px; height: 18px; place-items: center; }
     .cart-icon svg { width: 18px; height: 18px; overflow: visible; }
     .nav-actions { display:flex; align-items:center; gap:9px; }
-    .manager-access { display:grid; width:38px; height:38px; place-items:center; border:1px solid rgba(255,255,255,.2); border-radius:50%; background:rgba(255,255,255,.05); color:#f4d15c; transition:transform .2s,background .2s,border-color .2s; }
-    .manager-access:hover { transform:translateY(-2px); border-color:var(--yellow); background:rgba(248,194,15,.14); }
-    .manager-access svg { width:18px; height:18px; }
+    .account-access { display:grid; width:38px; height:38px; place-items:center; border:1px solid rgba(255,255,255,.2); border-radius:50%; background:rgba(255,255,255,.05); color:#f4d15c; transition:transform .2s,background .2s,border-color .2s; }
+    .account-access:hover { transform:translateY(-2px); border-color:var(--yellow); background:rgba(248,194,15,.14); }
+    .account-access svg { width:18px; height:18px; }
     .menu-toggle { display: none; padding: 9px 11px; }
 
     .hero { position: relative; overflow: hidden; background: var(--ink); color: #fff; }
     .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.63) 49%, rgba(0,0,0,.18) 100%); pointer-events: none; }
-    .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% center; opacity: .92; }
+    .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 58% center; opacity: .92; }
     .hero-content { position: relative; z-index: 1; min-height: 578px; display: grid; align-content: center; padding: 88px 0; }
     .hero .eyebrow { color: #ffdf59; }
     .hero h1 { max-width: 710px; margin: 0; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: clamp(2.8rem, 5.6vw, 5.1rem); font-weight: 400; line-height: .92; letter-spacing: .012em; text-transform: uppercase; }
@@ -247,6 +249,18 @@
     .manager-modal .container { width:100%; }
     .manager-close { position:absolute; top:15px; right:15px; display:grid; width:34px; height:34px; place-items:center; border:1px solid #4a4842; border-radius:50%; background:#1e1d19; color:#fff; font-size:1.35rem; line-height:1; }
     .manager-close:hover { border-color:var(--yellow); color:var(--yellow); }
+    .account-modal { display:none; position:fixed; inset:0; z-index:61; padding:92px 20px 24px; overflow-y:auto; background:rgba(0,0,0,.72); backdrop-filter:blur(7px); }
+    .account-modal.open { display:block; }
+    .account-dialog { position:relative; width:min(470px,100%); margin:0 auto; padding:30px; border:1px solid rgba(248,194,15,.55); border-radius:24px; background:#0d0d0c; box-shadow:0 26px 80px rgba(0,0,0,.62); }
+    .account-dialog h2 { margin:0; font-size:clamp(1.8rem,5vw,2.55rem); letter-spacing:-.06em; }
+    .account-dialog > p { margin:9px 0 23px; color:#c6c6c6; font-size:.9rem; line-height:1.5; }
+    .account-form { display:grid; gap:12px; padding:21px; border:1px solid #3f3d37; border-radius:18px; background:#171716; }
+    .account-form .field-label { color:#ededed; }
+    .account-form .field-input { color:#171717; background:#fff; }
+    .account-form .button { width:100%; }
+    .account-manager-link { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; margin-top:13px; padding:10px; border:0; background:transparent; color:#e7d17d; font-size:.8rem; font-weight:900; }
+    .account-manager-link:hover { color:var(--yellow); }
+    .account-manager-link svg { width:15px; height:15px; }
 
     .footer { padding: 57px 0 22px; background: #fff; }
     .footer-main { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 35px; padding-bottom: 41px; }
@@ -273,7 +287,7 @@
     .quantity-controls button { display: grid; place-items: center; width: 22px; height: 22px; border: 1px solid #b6b6b6; border-radius: 6px; background: #fff; font-weight: 900; }
     .quantity-controls span { min-width: 16px; font-size: .79rem; font-weight: 850; text-align: center; }
     .cart-price { align-self: start; font-size: .84rem; font-weight: 900; white-space: nowrap; }
-    .drawer-footer { max-height: min(65dvh, 590px); overflow: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+    .drawer-footer { max-height: min(65dvh, 590px); overflow: auto; padding-top: 16px; border-top: 1px solid var(--line); overscroll-behavior:contain; }
     .drawer-total { display: flex; justify-content: space-between; margin: 0 0 14px; font-size: 1.06rem; font-weight: 950; }
     .drawer-help { margin: 10px 0 0; color: var(--muted); font-size: .72rem; text-align: center; }
     .drawer-continue { width: auto; margin-top: 9px; padding: 8px 11px; font-size: .75rem; }
@@ -420,7 +434,9 @@
       .container { width: min(100% - 28px, 1160px); }
       .nav { min-height: 65px; gap: 10px; }
       .brand { font-size: .95rem; }
-      .brand-mark { width: 34px; height: 34px; font-size: 1.1rem; }
+      .brand-mark { width: 38px; height: 38px; font-size: 1.1rem; }
+      .brand-mark svg { width:30px; height:30px; }
+      .brand-name small { font-size:.46rem; }
       .cart-toggle { padding: 9px 11px; }
       .cart-toggle > span:first-child { display: none; }
       .menu-toggle { display: none; }
@@ -460,26 +476,46 @@
       .product-title { font-size: 1.04rem; }
       .drawer-form-grid, .drawer-payment-options { grid-template-columns: 1fr; }
       .drawer-form-grid .span-two { grid-column: auto; }
+      .cart-drawer { width:min(424px,100%); padding:16px; }
+      .drawer-head { padding-bottom:13px; }
+      .drawer-head h2 { font-size:1.35rem; }
+      .cart-list { flex:0 1 auto; max-height:min(30dvh,245px); margin:7px -4px; padding:0 4px; }
+      .cart-empty { min-height:110px; }
+      .drawer-footer { flex:1 1 auto; max-height:none; min-height:0; padding:13px 0 max(18px, env(safe-area-inset-bottom)); }
+      .drawer-footer .button.full, .drawer-footer .outline-button.full { min-height:46px; }
+      .drawer-continue { width:auto; max-width:100%; }
+      .drawer-checkout-form { padding-bottom:14px; }
+      .manager-modal, .account-modal { padding:10px 12px max(12px, env(safe-area-inset-bottom)); }
+      .manager-dialog, .account-dialog { width:100%; min-height:calc(100dvh - 20px); padding:22px 16px; border-radius:20px; }
+      .manager-close { top:12px; right:12px; }
+      .manager-heading { margin:8px 40px 22px 0; }
+      .manager-heading h2 { font-size:clamp(1.8rem,9vw,2.55rem); }
+      .manager-heading p { font-size:.87rem; line-height:1.45; }
+      .manager-login { display:grid; grid-template-columns:1fr; align-items:stretch; gap:16px; padding:18px; }
+      .manager-login .field-input { width:100%; }
+      .manager-login .field-label { margin-top:12px; }
+      .manager-login .button { min-height:46px; }
+      .manager-security-label { line-height:1.45; }
     }
   </style>
 </head>
 <body>
   <header class="site-header">
     <nav class="nav container" aria-label="Navegação principal">
-      <a class="brand" href="#inicio" aria-label="Hamburgueria Na Brasa - página inicial"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M11 20.5C12.8 14.7 18 11.5 24 11.5s11.2 3.2 13 9H11Z" fill="#F9E8A2" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 25h24l-3 5H15l-3-5Z" fill="#6E381B" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 31h24v4H12z" fill="#F5C70D" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M15 39h18M18 35l-4 6M24 35v6M30 35l4 6" stroke="#171510" stroke-width="2.4" stroke-linecap="round"/><path d="M24 8c-2.3-2.4-1.1-5.2 1.2-6.5-.2 2.3 2.8 3.8 1.6 6.5-.5 1.1-1.2 1.8-2.8 2.7Z" fill="#E85D1F"/></svg></span><span>Hamburgueria<br>Na Brasa</span></a>
+      <a class="brand" href="#inicio" aria-label="Hamburgueria Na Brasa - página inicial"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M13 19.2C14.6 13.9 19 11 24 11s9.4 2.9 11 8.2H13Z" fill="#FFF1A7" stroke="#1A1712" stroke-width="2.3" stroke-linejoin="round"/><path d="M15.5 16.5h17" stroke="#D99C16" stroke-width="1.35" stroke-linecap="round"/><circle cx="19" cy="15.2" r=".9" fill="#A66D10"/><circle cx="25" cy="14" r=".9" fill="#A66D10"/><circle cx="30" cy="16" r=".9" fill="#A66D10"/><path d="M12 22.2h24l-2 3.4H14l-2-3.4Z" fill="#3B8A43" stroke="#1A1712" stroke-width="2.3" stroke-linejoin="round"/><path d="M12.5 26h23l-2.8 5.5H15.3L12.5 26Z" fill="#623016" stroke="#1A1712" stroke-width="2.3" stroke-linejoin="round"/><path d="M14.5 31.5h19l-2 4.2h-15l-2-4.2Z" fill="#F9C30D" stroke="#1A1712" stroke-width="2.3" stroke-linejoin="round"/><path d="M16 36h16" stroke="#F8E9AD" stroke-width="3" stroke-linecap="round"/><path d="M17 40h14M19 36.5l-3 5M24 36.5v5M29 36.5l3 5" stroke="#1A1712" stroke-width="2.1" stroke-linecap="round"/><path d="M24 8.8c-2.5-2.8-1-5.4 1.4-7 .1 2.4 3.1 4.1 1.4 6.7-.7 1.1-1.4 1.5-2.8 2.3Z" fill="#E86222" stroke="#1A1712" stroke-width="1.15" stroke-linejoin="round"/></svg></span><span class="brand-name"><small>Hamburgueria</small>Na Brasa</span></a>
       <div class="nav-links" aria-label="Navegação da loja">
         <a class="active" href="#inicio">Início</a>
         <a href="cardapio.html">Cardápio</a>
         <a href="#sobre">A casa</a>
         <a href="#acompanhar">Acompanhar pedido</a>
       </div>
-      <div class="nav-actions"><button class="manager-access" type="button" id="open-manager" aria-label="Abrir painel do gerente" title="Painel do gerente"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 20v-1.2c0-2.7 2.3-4.8 5-4.8h5c2.7 0 5 2.1 5 4.8V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M18.5 5.3h2M19.5 4.3v2" stroke="#f8c20f" stroke-width="1.5" stroke-linecap="round"/></svg></button><button class="cart-toggle" type="button" id="open-cart" aria-label="Abrir sacola"><span>Sacola</span><span class="cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6.1 8.3h11.8l-1.1 10.3H7.2L6.1 8.3Z" fill="#D83727" stroke="#171510" stroke-width="1.55" stroke-linejoin="round"/><path d="M9 8.3V6.5a3 3 0 0 1 6 0v1.8" stroke="#F9D84F" stroke-width="1.7" stroke-linecap="round"/><path d="M9.2 12.7h5.6M10 14.7h4" stroke="#F9D84F" stroke-width="1.2" stroke-linecap="round"/></svg></span><span class="cart-count" id="cart-count">0</span></button></div>
+      <div class="nav-actions"><button class="account-access" type="button" id="open-account" aria-label="Abrir login do cliente" title="Login do cliente"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 20v-1.2c0-2.7 2.3-4.8 5-4.8h5c2.7 0 5 2.1 5 4.8V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M18.5 5.3h2M19.5 4.3v2" stroke="#f8c20f" stroke-width="1.5" stroke-linecap="round"/></svg></button><button class="cart-toggle" type="button" id="open-cart" aria-label="Abrir sacola"><span>Sacola</span><span class="cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6.1 8.3h11.8l-1.1 10.3H7.2L6.1 8.3Z" fill="#D83727" stroke="#171510" stroke-width="1.55" stroke-linejoin="round"/><path d="M9 8.3V6.5a3 3 0 0 1 6 0v1.8" stroke="#F9D84F" stroke-width="1.7" stroke-linecap="round"/><path d="M9.2 12.7h5.6M10 14.7h4" stroke="#F9D84F" stroke-width="1.2" stroke-linecap="round"/></svg></span><span class="cart-count" id="cart-count">0</span></button></div>
     </nav>
   </header>
 
   <main>
     <section class="hero" id="inicio" aria-labelledby="hero-title">
-      <img class="hero-photo" src="https://images.unsplash.com/photo-1610440042657-612c34d95e9f?auto=format&fit=crop&w=1920&q=90" alt="Hambúrguer artesanal com queijo e salada" fetchpriority="high">
+      <img class="hero-photo" src="assets/hero-chapa-na-brasa.png" alt="Hambúrgueres sendo preparados na chapa" fetchpriority="high">
       <div class="hero-content container">
         <p class="eyebrow">Hamburgueria Na Brasa • Lavras, MG</p>
         <h1 id="hero-title">A brasa acendeu.<br><em>A fome bateu.</em></h1>
@@ -503,7 +539,7 @@
           <p>Escolha uma oferta e monte sua sacola. O cardápio completo, com burgers, batatas e bebidas, está em uma página exclusiva.</p>
         </div>
         <section class="promos-section" aria-labelledby="promos-title">
-          <div class="promos-heading"><div><p class="eyebrow">Economize no pedido</p><h3 id="promos-title">Combos & promoções.</h3></div><p>Combos com sanduíche, batata e refrigerante, além de uma oferta individual do dia.</p></div>
+          <div class="promos-heading"><div><p class="eyebrow">Economize no pedido</p><h3 id="promos-title">Combos para todos os gostos.</h3></div><p>Um combo tradicional, especial, artesanal e um marmitex completo com bebida.</p></div>
           <div class="promos-grid" id="promos-grid" aria-live="polite"></div>
         </section>
         <p class="menu-note"><a href="cardapio.html" style="color:var(--yellow);font-weight:800">Abrir o cardápio completo →</a></p>
@@ -555,7 +591,7 @@
           <div class="brand-story-badges"><span class="brand-story-badge">Carne na brasa</span><span class="brand-story-badge">Pão tostado na hora</span><span class="brand-story-badge">Combos para compartilhar</span></div>
         </article>
         <aside class="brand-story-aside" aria-label="Informações da Hamburgueria Na Brasa">
-          <article class="brand-story-card"><span aria-hidden="true">🪵</span><div><strong>Fogo de verdade</strong><p>O ponto certo para cada burger.</p></div></article>
+          <article class="brand-story-card"><span aria-hidden="true">🔥</span><div><strong>Fogo de verdade</strong><p>O ponto certo para cada burger.</p></div></article>
           <article class="brand-story-card"><span aria-hidden="true">📍</span><div><strong>Rua da Brasa, 88</strong><p>Centro • Lavras, MG</p></div></article>
           <article class="brand-story-card"><span aria-hidden="true">🕕</span><div><strong>Todos os dias</strong><p>Das 18h às 23h30.</p></div></article>
         </aside>
@@ -634,6 +670,14 @@
       </div>
     </section>
 
+    <section class="account-modal" id="cliente-login" aria-labelledby="account-title" aria-hidden="true">
+      <div class="account-dialog" role="dialog" aria-modal="true" aria-labelledby="account-title"><button class="manager-close" id="close-account" type="button" aria-label="Fechar login do cliente">×</button>
+        <p class="eyebrow">Área do cliente</p><h2 id="account-title">Entre na sua conta.</h2><p>Acompanhe pedidos e deixe seus dados prontos para pedir ainda mais rápido.</p>
+        <form class="account-form" id="account-login-form"><label class="field-label" for="customer-login-email">Seu e-mail<input class="field-input" id="customer-login-email" type="email" autocomplete="email" placeholder="voce@email.com"></label><label class="field-label" for="customer-login-password">Senha<input class="field-input" id="customer-login-password" type="password" autocomplete="current-password" placeholder="Sua senha"></label><button class="button" type="submit">Entrar</button></form>
+        <button class="account-manager-link" id="open-manager-from-account" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 13.5 14.5 6a3.2 3.2 0 1 1 4.5 4.5L11.5 18H7v-4.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="16.6" cy="8.4" r=".9" fill="currentColor"/></svg>Login gerência</button>
+      </div>
+    </section>
+
     <section class="manager-section manager-modal" id="gerente" aria-labelledby="manager-title" aria-hidden="true">
       <div class="manager-dialog" role="dialog" aria-modal="true" aria-labelledby="manager-title"><button class="manager-close" id="close-manager" type="button" aria-label="Fechar painel do gerente">×</button><div class="container">
         <div class="manager-heading">
@@ -659,7 +703,7 @@
 
   <footer class="footer">
     <div class="container footer-main">
-      <div><a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M11 20.5C12.8 14.7 18 11.5 24 11.5s11.2 3.2 13 9H11Z" fill="#F9E8A2" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 25h24l-3 5H15l-3-5Z" fill="#6E381B" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M12 31h24v4H12z" fill="#F5C70D" stroke="#171510" stroke-width="2.4" stroke-linejoin="round"/><path d="M15 39h18M18 35l-4 6M24 35v6M30 35l4 6" stroke="#171510" stroke-width="2.4" stroke-linecap="round"/><path d="M24 8c-2.3-2.4-1.1-5.2 1.2-6.5-.2 2.3 2.8 3.8 1.6 6.5-.5 1.1-1.2 1.8-2.8 2.7Z" fill="#E85D1F"/></svg></span><span>Hamburgueria<br>Na Brasa</span></a><p class="footer-brand-copy">Sabor de brasa, ingredientes selecionados e a fome resolvida do jeito certo.</p></div>
+      <div><a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M13 19.2C14.6 13.9 19 11 24 11s9.4 2.9 11 8.2H13Z" fill="#FFF1A7" stroke="#1A1712" stroke-width="2.3" stroke-linejoin="round"/><path d="M15.5 16.5h17" stroke="#D99C16" stroke-width="1.35" stroke-linecap="round"/><circle cx="19" cy="15.2" r=".9" fill="#A66D10"/><circle cx="25" cy="14" r=".9" fill="#A66D10"/><circle cx="30" cy="16" r=".9" fill="#A66D10"/><path d="M12 22.2h24l-2 3.4H14l-2-3.4Z" fill="#3B8A43" stroke="#1A1712" stroke-width="2.3" stroke-linejoin="round"/><path d="M12.5 26h23l-2.8 5.5H15.3L12.5 26Z" fill="#623016" stroke="#1A1712" stroke-width="2.3" stroke-linejoin="round"/><path d="M14.5 31.5h19l-2 4.2h-15l-2-4.2Z" fill="#F9C30D" stroke="#1A1712" stroke-width="2.3" stroke-linejoin="round"/><path d="M16 36h16" stroke="#F8E9AD" stroke-width="3" stroke-linecap="round"/><path d="M17 40h14M19 36.5l-3 5M24 36.5v5M29 36.5l3 5" stroke="#1A1712" stroke-width="2.1" stroke-linecap="round"/><path d="M24 8.8c-2.5-2.8-1-5.4 1.4-7 .1 2.4 3.1 4.1 1.4 6.7-.7 1.1-1.4 1.5-2.8 2.3Z" fill="#E86222" stroke="#1A1712" stroke-width="1.15" stroke-linejoin="round"/></svg></span><span class="brand-name"><small>Hamburgueria</small>Na Brasa</span></a><p class="footer-brand-copy">Sabor de brasa, ingredientes selecionados e a fome resolvida do jeito certo.</p></div>
       <div><h3>Fale com a Na Brasa</h3><ul class="footer-list"><li><a href="https://www.instagram.com/hamburguerianabrasa.lavras/" target="_blank" rel="noreferrer">Instagram: @hamburguerianabrasa.lavras</a></li><li><a href="tel:+5535999990000">Telefone: (35) 99999-0000</a></li><li><a href="https://wa.me/5535999990000" target="_blank" rel="noreferrer">WhatsApp: (35) 99999-0000</a></li></ul></div>
       <div><h3>Onde estamos</h3><ul class="footer-list"><li>Rua da Brasa, 88</li><li>Centro • Lavras, MG</li><li>Todos os dias • 18h às 23h30</li></ul></div>
     </div>
@@ -1224,11 +1268,18 @@
     });
     $('#track-button').addEventListener('click', trackOrder);
     $('#track-order').addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); trackOrder(); } });
+    function openManagerModal() { $('#gerente').classList.add('open'); $('#gerente').setAttribute('aria-hidden', 'false'); $('#manager-email').focus(); }
     function closeManagerModal() { $('#gerente').classList.remove('open'); $('#gerente').setAttribute('aria-hidden', 'true'); }
-    $('#open-manager').addEventListener('click', () => { $('#gerente').classList.add('open'); $('#gerente').setAttribute('aria-hidden', 'false'); $('#manager-email').focus(); });
+    function openAccountModal() { $('#cliente-login').classList.add('open'); $('#cliente-login').setAttribute('aria-hidden', 'false'); $('#customer-login-email').focus(); }
+    function closeAccountModal() { $('#cliente-login').classList.remove('open'); $('#cliente-login').setAttribute('aria-hidden', 'true'); }
+    $('#open-account').addEventListener('click', openAccountModal);
+    $('#close-account').addEventListener('click', closeAccountModal);
+    $('#cliente-login').addEventListener('click', event => { if (event.target === $('#cliente-login')) closeAccountModal(); });
+    $('#account-login-form').addEventListener('submit', event => { event.preventDefault(); showToast('Login do cliente será liberado em breve.'); });
+    $('#open-manager-from-account').addEventListener('click', () => { closeAccountModal(); openManagerModal(); });
     $('#close-manager').addEventListener('click', closeManagerModal);
     $('#gerente').addEventListener('click', event => { if (event.target === $('#gerente')) closeManagerModal(); });
-    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeManagerModal(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeManagerModal(); closeAccountModal(); } });
     $('#manager-login-button').addEventListener('click', managerLogin);
     $('#manager-password').addEventListener('keydown', event => { if (event.key === 'Enter') managerLogin(); });
     $('#manager-logout').addEventListener('click', async () => {

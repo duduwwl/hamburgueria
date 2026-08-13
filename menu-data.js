@@ -32,10 +32,10 @@ window.naBrasaProducts = [
 ];
 
 window.naBrasaPromotions = [
-  { id: 'combo-classic', category: 'combos', categoryLabel: 'Combo', name: 'Combo Clássico', description: 'Clássico da Brasa + Batata Frita Crocante + Coca-Cola Original.', price: 39.90, image: 'assets/burger-tradicional-classic.png' },
-  { id: 'combo-bacon', category: 'combos', categoryLabel: 'Combo', name: 'Combo Bacon', description: 'X-Bacon da Casa + Batata Cheddar & Bacon + Coca-Cola Sem Açúcar.', price: 49.90, image: 'assets/burger-tradicional-bacon.png' },
-  { id: 'combo-duplo', category: 'combos', categoryLabel: 'Combo', name: 'Combo Duplo', description: 'Duplo Na Brasa + Batata Frita Crocante + Guaraná Antarctica.', price: 45.90, image: 'assets/burger-tradicional-duplo.png' },
-  { id: 'promo-mineirinho', category: 'promocoes', categoryLabel: 'Oferta individual', name: 'Mineirinho Especial', description: 'Oferta individual do dia: de R$ 36,90 por R$ 31,90.', price: 31.90, image: 'assets/burger-especial-dark.png' }
+  { id: 'combo-classic', category: 'combos', categoryLabel: 'Combo tradicional', name: 'Combo Clássico da Brasa', description: 'Clássico da Brasa + Batata Frita Crocante + Coca-Cola Original.', price: 39.90, image: 'assets/burger-tradicional-classic.png' },
+  { id: 'combo-mineirinho', category: 'combos', categoryLabel: 'Combo especial', name: 'Combo Mineirinho', description: 'Mineirinho Especial + Batata Frita Crocante + Guaraná Antarctica.', price: 46.90, image: 'assets/burger-especial-dark.png' },
+  { id: 'combo-trufado', category: 'combos', categoryLabel: 'Combo artesanal', name: 'Combo Trufado do Chef', description: 'Trufado do Chef + Batata Cheddar & Bacon + Coca-Cola Sem Açúcar.', price: 57.90, image: 'assets/burger-artesanal-dark.png' },
+  { id: 'combo-marmitex', category: 'combos', categoryLabel: 'Combo executivo', name: 'Combo Marmitex Completo', description: 'Marmitex Completo Na Brasa + Coca-Cola Original 350 ml.', price: 37.90, image: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=86' }
 ];
 
 window.naBrasaProducts.push(...window.naBrasaPromotions);
